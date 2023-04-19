@@ -1,113 +1,54 @@
 axios.defaults.headers.common['Authorization'] = 'Sz9geys35NfoLDyLNU8wOlUm';
 
-/* let obj = {
-	title: "Título do quizz",
-	image: "https://http.cat/411.jpg",
-	questions: [
-		{
-			title: "Título da pergunta 1",
-			color: "#123456",
-			answers: [
-				{
-					text: "Texto da resposta 1",
-					image: "https://http.cat/411.jpg",
-					isCorrectAnswer: true
-				},
-				{
-					text: "Texto da resposta 2",
-					image: "https://http.cat/412.jpg",
-					isCorrectAnswer: false
-				}
-			]
-		},
-		{
-			title: "Título da pergunta 2",
-			color: "#123456",
-			answers: [
-				{
-					text: "Texto da resposta 1",
-					image: "https://http.cat/411.jpg",
-					isCorrectAnswer: true
-				},
-				{
-					text: "Texto da resposta 2",
-					image: "https://http.cat/412.jpg",
-					isCorrectAnswer: false
-				}
-			]
-		},
-		{
-			title: "Título da pergunta 3",
-			color: "#123456",
-			answers: [
-				{
-					text: "Texto da resposta 1",
-					image: "https://http.cat/411.jpg",
-					isCorrectAnswer: true
-				},
-				{
-					text: "Texto da resposta 2",
-					image: "https://http.cat/412.jpg",
-					isCorrectAnswer: false
-				}
-			]
-		}
-	],
-	levels: [
-		{
-			title: "Título do nível 1",
-			image: "https://http.cat/411.jpg",
-			text: "Descrição do nível 1",
-			minValue: 0
-		},
-		{
-			title: "Título do nível 2",
-			image: "https://http.cat/412.jpg",
-			text: "Descrição do nível 2",
-			minValue: 50
-		}
-	]
+//Código referente a tela1
+//Exibe todos os quizzes na div "quizzes"
+
+/* Pegatodos os objetos de "id" do local storage, e solicita uma a uma
+com api get e depois exiba na tela*/
+
+// "id": [id1, id2, id3, id4];
+//ids: array ^^^^^   //ainda n foi testada
+function userQuiz(ids) {
+    const usQuiz = document.querySelector('.user-quiz');
+    let lista = [];
+    for (i = 0; i<ids.length -1; i++) {
+        let promisse = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${i}`);
+        promisse.then(x => {
+            lista.push(x.data);
+        })
+        promisse.catch(x => {
+            console.log(x)
+        })
+    }
+    exibeQuizzes(lista, usQuiz);
 }
 
-const envia = axios.post('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes', obj);
-envia.then(x => {
-    console.log(`STATUS ENVIO OBJ ${x.status}`);
-})
-envia.catch(x => {
-    console.log(`STATUS ENVIO OBJ ${x.status}`);
-}) */
-
-
-//Aqui exibe todos os quizzes na div 
 let arrayQuiz;
 const quizzes = document.querySelector('.quizzes');
+quizzes.innerHTML = '';
 
 let pro = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes')
 pro.then(x => {
     console.log(x);
     arrayQuiz = x.data;
-    quizzes.innerHTML = '';
-    arrayQuiz.forEach(element => {
-        quizzes.innerHTML += `<div class="quiz">
+    exibeQuizzes(arrayQuiz, quizzes);
+    
+}) 
+
+pro.catch(x =>{
+    console.log(x);
+})
+
+//percorre e adiciona cada quiz do array na div de "where"
+function exibeQuizzes(array, where) {
+    array.forEach(element => {
+        where.innerHTML += `<div class="quiz">
         <img class="img-quiz" src="${element.image}" alt="">
         <div class="tittle">${element.title}</div>
       </div>`    
     });
-}) 
+}
 
 
-/*let pro = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes')
-pro.then(x => {
-    console.log(x);
-    arrayQuiz = x.data;
-    quiz.innerHTML = '';
-    arrayQuiz.forEach(element => {
-        quiz.innerHTML += `<img class="img-quiz" src="${element.image}" alt="">
-    <div class="tittle">${element.title}</div>`    
-    });
-})
-pro.catch(x => {
-    console.log(x);
-})
- */
 
+//tela1 end
