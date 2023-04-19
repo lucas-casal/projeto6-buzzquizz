@@ -50,5 +50,72 @@ function exibeQuizzes(array, where) {
 }
 
 
-
 //tela1 end
+
+
+var title=0;
+var image=0;
+var numberOfQuestions=1;
+var levels=0;
+const questionsArray = [];
+const optionsArray = [];
+
+
+
+
+function confirmInfo(){
+
+    const quizTitle = document.getElementById("quiz-title").value;
+    const quizImage = document.getElementById("quiz-image-url").value;
+    const quizNumberOfQuestions = document.getElementById("quiz-number-questions").value;
+    const quizLevels = document.getElementById("quiz-number-levels").value;
+    console.log(quizTitle);
+     
+    
+}
+function confirmQuestions(){
+    for (i=0; i<numberOfQuestions; i++){
+        const question = document.querySelectorAll(".question")[i].value;
+        const questionColor = document.querySelectorAll(".question-color")[i].value;
+        const color = "#" + questionColor;
+        const wrongOptionArray = document.querySelectorAll(".wrong-options-container")[i].children;
+        const rightOption = document.querySelectorAll(".right-option")[i].value;
+        const rightImage = document.querySelectorAll(".right-image-url")[i].value;
+        
+        const rightOptionObject = {
+            text: rightOption,
+            image: rightImage,
+            isCorrectAnswer: true
+        }
+        optionsArray.push(rightOptionObject);
+
+        for (x=0; x<3; x++){
+            console.log(wrongOptionArray)
+            question.children
+            const wrongOption = wrongOptionArray[x].children[0];
+            const wrongImage = wrongOptionArray[x].children[1];
+            const wrongOptionObject = {
+                text: wrongOption,
+                image: wrongImage,
+                isCorrectAnswer: false
+
+            }
+            console.log(wrongOption)
+            console.log(wrongImage)
+            optionsArray.push(wrongOptionObject);
+            
+        }
+ 
+        const questionObject = {
+            title: question,
+            color: color,
+            answers: optionsArray
+        };
+        questionsArray.push(questionObject);
+        console.log(questionsArray);
+    }
+    console.log(questionsArray);
+
+
+
+}
