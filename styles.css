@@ -4,6 +4,7 @@
 
 body {
   background-color: #fafafa;
+  width: 100%;
 }
 
 header {
@@ -33,6 +34,8 @@ main {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
 .create-quiz {
@@ -41,7 +44,7 @@ main {
   flex-direction: column;
   align-items: center;
   margin: 77px 0 0 0;
-  width: 1051px;
+  width: 90%;
   height: 181px;
   background: #fafafa;
   border: 1px dashed #d5d5d5;
@@ -80,16 +83,16 @@ h3 {
 
 .my-quizzes {
   display: flex;
+  align-items: center;
   gap: 17px;
   width: 100%;
   padding-left: 5%;
-  margin: 70px 0 0 0;
+  margin: 70px 0 5px 0;
 
   /* (feito uma pequena ganbiarra aqui) */
 }
 
 h2 {
-  width: 122px;
   height: 23px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -122,6 +125,11 @@ h2 {
   flex-wrap: wrap;
   gap: 15px;
 }
+.user-quiz {
+  position: relative;
+  width: 340px;
+  height: 181px;
+}
 
 .img-quiz {
   width: 340px;
@@ -132,6 +140,8 @@ h2 {
     rgba(0, 0, 0, 0.5) 65.62%,
     rgba(0, 0, 0, 0.8) 100%
   );
+  /* verificar o gradiente */
+  object-fit: cover;
   border-radius: 5px;
   position: relative;
 }
@@ -148,14 +158,50 @@ p {
   color: #ffffff;
   z-index: 1;
   position: absolute;
-  bottom: 10px;
+  bottom: 0;
+  left: 10px;
 }
 
-.quizzes {
+.all-quizzes {
   display: flex;
-  justify-content: center;
+  gap: 17px;
+  width: 100%;
+  padding-left: 5%;
+  margin: 70px 0 5px 0;
 }
 
-.hidden {
+.wrappe-quiz {
+    display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.quiz {
+    position: relative;
+    width: 340px;
+    height: 181px;
+}
+
+ .hidden {
   display: none;
+} 
+
+
+@media ((max-width: 1100px) ) {
+   
+    header {
+        width: 100%
+    }
+    .my-quizzes{
+        justify-content: space-between;
+}
+    .wrappe-user-quiz {
+        flex-direction: column;
+    }
+
+    .wrappe-quiz {
+        flex-direction: column;
+    }
 }
