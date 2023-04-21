@@ -171,7 +171,7 @@ p {
 }
 
 .wrappe-quiz {
-    display: flex;
+  display: flex;
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
@@ -184,7 +184,7 @@ p {
     height: 181px;
 }
 
- .hidden {
+.hidden {
   display: none;
 } 
 
@@ -196,7 +196,7 @@ p {
     }
     .my-quizzes{
         justify-content: space-between;
-}
+    }
     .wrappe-user-quiz {
         flex-direction: column;
     }

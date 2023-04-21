@@ -1,54 +1,138 @@
 axios.defaults.headers.common['Authorization'] = 'Sz9geys35NfoLDyLNU8wOlUm';
 
+function callScreen3() {
+    const screnn31 = document.querySelector('.basic-info-background');
+    const tela1 = document.querySelector('.tela1');
+    tela1.classList.add('hidden');
+    screnn31.classList.remove('hidden');
+}
+
+function callScreen2() {
+    //const screnn31 = document.querySelector('.basic-info-background');
+    //const tela1 = document.querySelector('.tela1');
+    //tela1.classList.add('hidden');
+    //screnn31.classList.remove('hidden');
+    console.log('CHAMA TELA 2');
+}
+
+
+
+//verifica se tem ids já salvos, se tiver armazena no ids
+let temId = false;
+const ids = [];
+const arrr = getIdLocalStorage();
+if (arrr != null){
+    temId = true;
+    arrr.forEach(x => {
+        ids.push(x)
+    })
+}
+
+
+//quando fizer o post do quiz, pegar o objt id do quiz, e passar como parâmetro:
+
+//debugger
+function addIdLocalStorage(id) {
+    temId = true;
+    ids.push({
+		id: id
+	},);
+    console.log(`Lista de id1s: ${ids}`);
+    const listasIdsSerialiado = JSON.stringify(ids);
+    localStorage.setItem("idUserQuiz", listasIdsSerialiado);
+} 
+
+console.log(`ids: ${getIdLocalStorage()}`);
+
+//pega o objeto de lista adicionado no local storage
+function getIdLocalStorage() {
+    const listaSerializada = localStorage.getItem("idUserQuiz");
+    const ids = JSON.parse(listaSerializada); 
+    return ids;
+}
+
 //Código referente a tela1
-//Exibe todos os quizzes na div "quizzes"
+//Exibe todos os quizzes na div "wrappe-user-quiz"
 
 /* Pegatodos os objetos de "id" do local storage, e solicita uma a uma
 com api get e depois exiba na tela*/
 
 // "id": [id1, id2, id3, id4];
 //ids: array ^^^^^   //ainda n foi testada
-function userQuiz(ids) {
-    const usQuiz = document.querySelector('.user-quiz');
-    let lista = [];
+let listaUQ = [];
+function userQuiz() {
+    let ids = getIdLocalStorage();
+    console.log(ids);
+    console.log('ids acima');
+    const usQuiz = document.querySelector('.wrappe-user-quiz');
+    usQuiz.innerHTML = '';
     for (i = 0; i<ids.length -1; i++) {
-        let promisse = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${i}`);
+        let promisse = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${ids[i].id}`);
         promisse.then(x => {
-            lista.push(x.data);
+            console.log(`RETORNO DO USER QUIZ: ${i}:`);
+            console.log(x);
+            listaUQ.push(x.data);
         })
         promisse.catch(x => {
+            console.log(`RETORNO DO USER QUIZ: ${x}`);
             console.log(x)
         })
     }
-    exibeQuizzes(lista, usQuiz);
+    debugger
+    exibeQuizzes(listaUQ, usQuiz, "user-quiz",'onclick="callQuizScreen2(this)"');
 }
 
-let arrayQuiz;
-const quizzes = document.querySelector('.quizzes');
-quizzes.innerHTML = '';
 
-let pro = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes')
-pro.then(x => {
-    console.log(x);
-    arrayQuiz = x.data;
-    exibeQuizzes(arrayQuiz, quizzes);
-    
-}) 
+//
+if (temId) {
+    userQuiz();
+} else {
+    console.log('não tem id ainda');
+}
 
-pro.catch(x =>{
-    console.log(x);
-})
 
-//percorre e adiciona cada quiz do array na div de "where"
-function exibeQuizzes(array, where) {
+
+//A função que vai pegar o quiz clicado e chamar display none pra tela 1
+function callQuizScreen2(element) {
+    console.log(element);
+    const pros = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${element.id}`);
+    pros.then(x => {
+        console.log('clicou')
+        console.log(x);
+    });
+    pros.catch(x => console.log(x.status));
+}
+
+//percorre e adiciona cada quiz do array na div de "where" + CLASSS adiciona classe e FUN adiciona funções
+function exibeQuizzes(array, where, classs, fun) {
     array.forEach(element => {
-        where.innerHTML += `<div class="quiz">
+        where.innerHTML += `<div id="${element.id}" ${fun} class="${classs}">
         <img class="img-quiz" src="${element.image}" alt="">
-        <div class="tittle">${element.title}</div>
+        <p>${element.title}</p>
       </div>`    
     });
 }
 
+function showAllQuizT1() {
+    let arrayQuiz;
+    const allQuizzes = document.querySelector('.wrappe-quiz');
+    console.log(allQuizzes);
+    allQuizzes.innerHTML = '';
+
+    let pro = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
+    pro.then(x => {
+        console.log(x);
+        arrayQuiz = x.data;
+        exibeQuizzes(arrayQuiz, allQuizzes, "quiz", 'onclick="callQuizScreen2(this)"');
+        
+    }) 
+
+    pro.catch(x =>{
+        console.log(x);
+    })
+}
+
+showAllQuizT1();
 
 //tela1 end
 
