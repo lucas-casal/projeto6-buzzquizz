@@ -20,18 +20,18 @@
     <!-- tela1 -->
     <main>
       <!-- essa classe só aparece* enqnt ainda não tem quiz feito pelo user -->
-      <div class="create-quiz">
+      <div class="create-quiz hidden">
         <h3>Você não criou nenhum quizz ainda</h3>
         <button class="btn-create">Criar Quizz</button>
       </div>
-      <div class="my-quizzes">
+      <div class="my-quizzes hidden">
         <h2>Seus Quizzes</h2>
         <button class="btn-icon">
           <ion-icon class="icon" name="add-circle"></ion-icon>
           </ion-icon>
         </button>
       </div>
-      <div class="wrappe-user-quiz">
+      <div class="wrappe-user-quiz hidden">
         <div class="user-quiz">
           <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
           <p>testetstetse</p>
@@ -47,10 +47,10 @@
       </div>
 
       <!-- Todos os -->
-      <div class="all-quizzes">
+      <div class="all-quizzes hidden">
         <h2>Todos os Quizzes</h2>
       </div>
-      <div class="wrappe-quiz">
+      <div class="wrappe-quiz hidden">
         <div class="quiz">
           <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
           <p>testetstetse</p>
@@ -76,162 +76,142 @@
           <p>testetstetse</p>
         </div>
       </div>
-      <!-- essa é onde vão ser exibidos os ja existentes -->
-      <!-- <div class="user-quiz">
-        <div class="quiz">
-          <img class="img-quiz" src="" alt="" />
-          <div class="tittle"></div>
-        </div>
-        </div> -->
-      <!-- <h2>Todos os quizzes</h2>
-        <div class="quizzes">
-          <div class="quiz">
-            <img class="img-quiz" src="" alt="" />
-            <div class="tittle"></div>
-          </div>
-        </div> -->
+     
       <!-- tela1 -->
       <!-- abre Página 3.1 - info básica do quizz-->
-      <!-- 
+     
         <div class="basic-info-background">
-        <div class="top-bar">
-            BuzzQuizz
-        </div>
     
-        <div class="creating-titles">
+        <div class="creating-titles hidden">
           Comece pelo começo
         </div>
     
-        <div class="inputs-container">
-          <input type = "text" onchange="lengthCheck(value, 20, 65)" id="quiz-title" placeholder="Título do seu quizz" required>
-          <input type = "url" id="quiz-image-url" placeholder="URL da imagem do seu quizz" required>
-          <input type = "number" min="3" onchange="valueCheck(value, 3)" id="quiz-number-questions" placeholder="Quantidade de perguntas do quizz" required>
-          <input type = "number" min="2" onchange="valueCheck(value, 2)" id="quiz-number-levels" placeholder="Quantidade de níveis do quizz" required>
+        <div class="inputs-container hidden">
+          <input class="inputs" type = "text" onchange="lengthCheck(value, 20, 65)" id="quiz-title" placeholder="Título do seu quizz" required>
+          <input class="inputs" type = "url" id="quiz-image-url" placeholder="URL da imagem do seu quizz" required>
+          <input class="inputs" type = "number" min="3" onchange="valueCheck(value, 3)" id="quiz-number-questions" placeholder="Quantidade de perguntas do quizz" required>
+          <input class="inputs" type = "number" min="2" onchange="valueCheck(value, 2)" id="quiz-number-levels" placeholder="Quantidade de níveis do quizz" required>
         </div>
         
-         <button class="next-step-button" onclick="confirmInfo()">Prosseguir para criar perguntas</button>
-        </div> -->
+         <button class="next-step-button hidden" onclick="confirmInfo()">Prosseguir para criar perguntas</button>
+        </div> 
       <!-- fecha Página 3.1 - info básica do quizz-->
       <!-- abre Página 3.2 - perguntas do quizz-->
-      <!-- <div class="creating-questions-background hidden">
-        <div class="top-bar">BuzzQuizz</div>
+       <div class="creating-questions-background">
         
-        <div class="creating-titles">Crie suas perguntas</div>
+        <div class="creating-titles hidden">Crie suas perguntas</div>
         
-        <div class="creating-background">
+        <div class="creating-background hidden">
           <div class="inputs-container">
-            Pergunta 1
+            <h4>Pergunta 1 </h4>
             <input type="text" class="question" placeholder="Texto da pergunta" />
             <input
               type="text"
-              class="question-color"
+              class="question-color question"
               placeholder="Cor de fundo da pergunta"
             />
           </div>
         
           <div class="inputs-container">
-            Resposta correta
+            <h4>Resposta correta</h4> 
             <input
               type="text"
-              class="right-option"
+              class="right-option question"
               placeholder="Resposta correta"
             />
             <input
               type="text"
-              class="right-image-url"
+              class="right-image-url question"
               placeholder="URL da imagem"
             />
           </div>
         
           <div class="wrong-options-container">
             <div class="inputs-container">
-              Resposta incorreta
+              <h4>Respostas incorreta</h4> 
               <input
                 type="text"
-                class="wrong-option"
+                class="wrong-option question"
                 placeholder="Resposta incorreta 1"
               />
               <input
                 type="text"
-                class="wrong-image-url"
+                class="wrong-image-url question"
                 placeholder="URL da imagem 1"
               />
             </div>
             <div class="inputs-container">
               <input
                 type="text"
-                class="wrong-option"
+                class="wrong-option question"
                 placeholder="Resposta incorreta 2"
               />
               <input
                 type="text"
-                class="wrong-image-url"
+                class="wrong-image-url question"
                 placeholder="URL da imagem 2"
               />
             </div>
             <div class="inputs-container">
               <input
                 type="text"
-                class="wrong-option"
+                class="wrong-option question"
                 placeholder="Resposta incorreta 3"
               />
               <input
                 type="text"
-                class="wrong-image-url"
+                class="wrong-image-url question"
                 placeholder="URL da imagem 3"
               />
             </div>
           </div>
         </div>
         
-        <div class="next-step-button" onclick="confirmQuestions()">
+        <div class="next-step-button hidden" onclick="confirmQuestions()">
           Prosseguir para criar perguntas
         </div>
-        </div> -->
+        </div>
       <!-- fecha Página 3.2 - perguntas do quizz-->
 
 <!-- abre Página 3.3 - levels do quizz-->
-<!-- <div class="creating-levels-background">
-  <div class="top-bar">
-      BuzzQuizz
-  </div>
+<div class="creating-levels-background hidden ">
 
-  <div class="creating-levels-titles">
+  <div class="creating-levels-titles creating-titles hidden">
     Agora, decida os níveis!
   </div>
 
-  <div class="creating-background">
+  <div class="creating-background hidden">
     <div class="inputs-container">
-      Nível 1
-      <input type = "text" minlength="10" class="level" placeholder="Título do nível" required>
-      <input type = "number" min="0" max="100" class="level-percentage" placeholder="% de acerto mínima" required>
-      <input type = "url" class="level-url" placeholder="URL da imagem do nível" required>
-      <input type = "text" class="level-description" placeholder="Descrição do nível" required>
+      <h4>Nível 1</h4>
+      <input class="question" type = "text" minlength="10" class="level" placeholder="Título do nível" required>
+      <input class="question" type = "number" min="0" max="100" class="level-percentage" placeholder="% de acerto mínima" required>
+      <input class="question" type = "url" class="level-url" placeholder="URL da imagem do nível" required>
+      <input class="question" type = "text" class="level-description" placeholder="Descrição do nível" required>
     </div> 
   </div>
 
-  <button class="next-step-button" onclick="confirmLevels()">Finalizar Quizz</button>
--->
+  <button class="next-step-button hidden" onclick="confirmLevels()">Finalizar Quizz</button>
+</div>
 <!-- fecha Página 3.3 - levels do quizz-->
 
 <!-- abre Página 3.4 - conclusão do quizz-->
-<!-- <div class="creating-end-background">
-  <div class="top-bar">
-      BuzzQuizz
-  </div>
+<div class="creating-end-background">
 
-  <div class="creating-end-titles">
+
+  <div class="creating-end-titles creating-titles">
     Seu quizz está pronto!
   </div>
   <div class="creating-background">
-    <img class="quizz-image" >
-    <div class="quizz-title">
+    
+    <img class="quizz-image" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" >
+    <span class="quizz-title"> testestetste
+   
     </div> 
   </div>
 
   <button class="next-step-button" onclick="goToCreatedQuizz()">Acessar Quizz</button>
   <div class="home-button" onclick="backToPage1()">Voltar pra home</div>
--->
+</div>
 <!-- fecha Página 3.4 - conclusão do quizz-->
     </main>
     <footer></footer>
