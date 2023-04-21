@@ -92,33 +92,24 @@
         </div> -->
       <!-- tela1 -->
       <!-- abre Página 3.1 - info básica do quizz-->
-      <!-- <div class="basic-info-background hidden">
-        <div class="top-bar">BuzzQuizz</div>
-        
-        <div class="creating-titles">Comece pelo começo</div>
-        
+      <!-- 
+        <div class="basic-info-background">
+        <div class="top-bar">
+            BuzzQuizz
+        </div>
+    
+        <div class="creating-titles">
+          Comece pelo começo
+        </div>
+    
         <div class="inputs-container">
-          <input type="text" id="quiz-title" placeholder="Título do seu quizz" />
-          <input
-            type="text"
-            id="quiz-image-url"
-            placeholder="URL da imagem do seu quizz"
-          />
-          <input
-            type="number"
-            id="quiz-number-questions"
-            placeholder="Quantidade de perguntas do quizz"
-          />
-          <input
-            type="number"
-            id="quiz-number-levels"
-            placeholder="Quantidade de níveis do quizz"
-          />
+          <input type = "text" onchange="lengthCheck(value, 20, 65)" id="quiz-title" placeholder="Título do seu quizz" required>
+          <input type = "url" id="quiz-image-url" placeholder="URL da imagem do seu quizz" required>
+          <input type = "number" min="3" onchange="valueCheck(value, 3)" id="quiz-number-questions" placeholder="Quantidade de perguntas do quizz" required>
+          <input type = "number" min="2" onchange="valueCheck(value, 2)" id="quiz-number-levels" placeholder="Quantidade de níveis do quizz" required>
         </div>
         
-        <div class="next-step-button" onclick="confirmInfo()">
-          Prosseguir para criar perguntas
-        </div>
+         <button class="next-step-button" onclick="confirmInfo()">Prosseguir para criar perguntas</button>
         </div> -->
       <!-- fecha Página 3.1 - info básica do quizz-->
       <!-- abre Página 3.2 - perguntas do quizz-->
@@ -198,6 +189,50 @@
         </div>
         </div> -->
       <!-- fecha Página 3.2 - perguntas do quizz-->
+
+<!-- abre Página 3.3 - levels do quizz-->
+<!-- <div class="creating-levels-background">
+  <div class="top-bar">
+      BuzzQuizz
+  </div>
+
+  <div class="creating-levels-titles">
+    Agora, decida os níveis!
+  </div>
+
+  <div class="creating-background">
+    <div class="inputs-container">
+      Nível 1
+      <input type = "text" minlength="10" class="level" placeholder="Título do nível" required>
+      <input type = "number" min="0" max="100" class="level-percentage" placeholder="% de acerto mínima" required>
+      <input type = "url" class="level-url" placeholder="URL da imagem do nível" required>
+      <input type = "text" class="level-description" placeholder="Descrição do nível" required>
+    </div> 
+  </div>
+
+  <button class="next-step-button" onclick="confirmLevels()">Finalizar Quizz</button>
+-->
+<!-- fecha Página 3.3 - levels do quizz-->
+
+<!-- abre Página 3.4 - conclusão do quizz-->
+<!-- <div class="creating-end-background">
+  <div class="top-bar">
+      BuzzQuizz
+  </div>
+
+  <div class="creating-end-titles">
+    Seu quizz está pronto!
+  </div>
+  <div class="creating-background">
+    <img class="quizz-image" >
+    <div class="quizz-title">
+    </div> 
+  </div>
+
+  <button class="next-step-button" onclick="goToCreatedQuizz()">Acessar Quizz</button>
+  <div class="home-button" onclick="backToPage1()">Voltar pra home</div>
+-->
+<!-- fecha Página 3.4 - conclusão do quizz-->
     </main>
     <footer></footer>
     <script
