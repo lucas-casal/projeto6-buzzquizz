@@ -59,19 +59,20 @@ com api get e depois exiba na tela*/
 
 // "id": [id1, id2, id3, id4];
 //ids: array ^^^^^   //ainda n foi testada
+const usQuiz = document.querySelector('.wrappe-user-quiz');
 let listaUQ = [];
 function userQuiz() {
     let ids = getIdLocalStorage();
     console.log(ids);
     console.log('ids acima');
-    const usQuiz = document.querySelector('.wrappe-user-quiz');
+    
     usQuiz.innerHTML = '';
-    for (i = 0; i<ids.length -1; i++) {
+    for (i = 0; i<ids.length; i++) {
+
         let promisse = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${ids[i].id}`);
         promisse.then(x => {
-            console.log(`RETORNO DO USER QUIZ: ${i}:`);
-            console.log(x);
             listaUQ.push(x.data);
+            exibeQuizzes(listaUQ, usQuiz, "user-quiz",'onclick="callQuizScreen2(this)"');
         })
         promisse.catch(x => {
             console.log(`RETORNO DO USER QUIZ: ${x}`);
@@ -79,16 +80,21 @@ function userQuiz() {
         })
     }
 
-    //Inicio de um ṕroblema; nao está exibindo na tela:
-    exibeQuizzes(listaUQ, usQuiz, "user-quiz",'onclick="callQuizScreen2(this)"');
 }
+    
 
 
 //
 if (temId) {
     userQuiz();
+    document.querySelector(".my-quizzes").classList.remove("hidden");
+    document.querySelector(".wrappe-user-quiz").classList.remove("hidden")
+    document.querySelector(".create-quiz").classList.add("hidden")
 } else {
     console.log('não tem id ainda');
+    document.querySelector(".my-quizzes").classList.add("hidden");
+    document.querySelector(".wrappe-user-quiz").classList.add("hidden")
+    document.querySelector(".create-quiz").classList.remove("hidden")
 }
 
 
@@ -135,9 +141,16 @@ function showAllQuizT1() {
 
 showAllQuizT1();
 
+function callQuizScreen3(){
+    document.querySelector('.tela1').classList.add("hidden");
+    document.querySelector('.basic-info-background').classList.remove("hidden");
+}
 //tela1 end
 
-//código referente à tela3 
+
+
+
+// tela 3 V
 var title=0;
 var image=0;
 var numberOfQuestions=1;
@@ -163,23 +176,23 @@ function checkUrl(string) {
 //função para checar hexadecimal
 function hexCheck(hex){
     colorCheckedArray=[];
-    var R = hex.substr(0,2);
-    var G = hex.substr(2,2);
-    var B = hex.substr(4,2);
+    var R = hex.substr(1,2);
+    var G = hex.substr(3,2);
+    var B = hex.substr(5,2);
 
-    if (hex.length === 6){
-        R = hex.substr(0,2);
-        G = hex.substr(2,2);
-        B = hex.substr(4,2);
+    if (hex.length === 7){
+        R = hex.substr(1,2);
+        G = hex.substr(3,2);
+        B = hex.substr(5,2);
 
         decimalR = parseInt(R, 16)
         decimalG = parseInt(G, 16)
         decimalB = parseInt(B, 16)
 
-    } else if (hex.length === 3){
-        R = hex.substr(0,1);
-        G = hex.substr(1,1);
-        B = hex.substr(2,1);
+    } else if (hex.length === 4){
+        R = hex.substr(1,1);
+        G = hex.substr(2,1);
+        B = hex.substr(3,1);
     
         decimalR = parseInt(R, 16)
         decimalG = parseInt(G, 16)
@@ -234,16 +247,20 @@ function confirmInfo(){
     const quizTitle = document.getElementById("quiz-title").value;
     numberOfQuestions= document.getElementById("quiz-number-questions").value;
     numberOfLevels = document.getElementById("quiz-number-levels").value;
+    var stopIt = false;
 
     if (!lengthCheck(quizTitle, 20, 65)){
         alert("O título inserido para o quizz tem " + quizTitle.length + " caracteres! \n Deveria ter entre 20 e 65")
-        
+        stopIt = true
     } else if (!checkUrl(quizImage)){
         alert("URL da imagem digitada é inválida!");
+        stopIt = true
     } else if (!valueCheck(numberOfQuestions, 3)){
         alert("Você deve criar, pelo menos, 3 perguntas!");
+        stopIt = true
     } else if(!valueCheck(numberOfLevels, 2)){
         alert("Você deve criar, pelo menos, 2 níveis!");
+        stopIt = true
     }
 
     //cria as "caixas" de criação de perguntas
@@ -345,7 +362,7 @@ function confirmInfo(){
         inputWrongImage3.setAttribute('placeholder', 'URL da imagem 3');
         wrongContainer3.appendChild(inputWrongImage3);
 
-        document.querySelector(".creating-questions-titles").after(questionBackground)        
+        document.querySelector(".questions-titles").after(questionBackground)        
     }
      
 
@@ -391,6 +408,10 @@ function confirmInfo(){
 
         document.querySelector(".creating-levels-titles").after(levelBackground)        
     }
+    if (!stopIt){
+    document.querySelector(".creating-questions-background").classList.remove("hidden")
+    document.querySelector(".basic-info-background").classList.add("hidden")
+    }
 }
 
 
@@ -402,23 +423,27 @@ function confirmQuestions(){
         optionsArray = []
         const question = document.querySelectorAll(".question")[i].value;
         const questionColor = document.querySelectorAll(".question-color")[i].value;
-        const color = "#" + questionColor;
+        const color = questionColor;
         const wrongOptionArray = document.querySelectorAll(".wrong-options-container")[i].children;
         const rightOption = document.querySelectorAll(".right-option")[i].value;
         const rightImage = document.querySelectorAll(".right-image-url")[i].value;  
-        
+        var stopIt = false
         //checking inputs
         if (!lengthCheck(question, 20)){
             alert("Uma de suas perguntas tem " + question.length + " caracteres! \n Deveria ter, pelo menos, 20.")
+            stopIt = true
             break
         } else if (!hexCheck(questionColor)){
             alert ("Um dos códigos de cor digitados não está no formato HEX!")
+            stopIt = true
             break
         } else if (!lengthCheck(rightOption, 1)){
             alert("Uma de suas respostas corretas está vazia!")
+            stopIt = true
             break
         } else if (!checkUrl(rightImage)){
             alert("URL da imagem digitada é inválida!");
+            stopIt = true
             break
         }
         
@@ -459,8 +484,12 @@ function confirmQuestions(){
 
     }
     createdQuizz.questions = questionsArray;
-
-}}
+    if (!stopIt){
+        document.querySelector(".creating-questions-background").classList.add("hidden")
+        document.querySelector(".creating-levels-background").classList.remove("hidden")
+    }
+}
+}
 
 
 function confirmLevels(){
@@ -512,15 +541,59 @@ function confirmLevels(){
     createdQuizz.levels = levelsArray
     console.log(createdQuizz);
     } 
-    const promise = axios.post(
+
+    const promisePost = axios.post(
         "https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes",
         createdQuizz
     );
-  
-  promise.then(apiFeedback);
+    
+   
+    promisePost.then(postProcess);
 }
 
-function apiFeedback(sent) {
-    console.log(sent.data);
+var createdQuizzID = 0;
+function getProcess(resposta){
+    console.log(resposta.data);
+    createdQuizzID = resposta.data[0].id
+    addIdLocalStorage(createdQuizzID)
+    printCreatedQuizz(resposta.data[0]);
 }
 
+function postProcess(resposta){
+    const promiseGet = axios.get(
+        "https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes",
+    );
+    promiseGet.then(getProcess);
+    console.log(resposta.data);
+
+}
+
+function printCreatedQuizz(resposta){    
+    const createdQuizzBackground = document.createElement("div");
+    createdQuizzBackground.className = "creating-background";
+        
+    const createdQuizzImage = document.createElement("img");
+    createdQuizzImage.className = "quizz-image";
+    createdQuizzImage.setAttribute("src", resposta.image);
+    createdQuizzBackground.appendChild(createdQuizzImage);
+
+    const createdQuizzTitle = document.createElement("div");
+    createdQuizzTitle.className = "quizz-title";
+    createdQuizzTitle.innerText = resposta.title;
+    createdQuizzBackground.appendChild(createdQuizzTitle);
+    document.querySelector(".creating-end-titles").after(createdQuizzBackground);    
+
+    document.querySelector(".creating-levels-background").classList.add("hidden")
+    document.querySelector(".creating-end-background").classList.remove("hidden")
+
+}
+
+function goToCreatedQuizz(element= createdQuizzID){
+    console.log(element);
+    const pros = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${element}`);
+    pros.then(x => {
+        console.log('clicou')
+        console.log(x);
+    });
+    pros.catch(x => console.log(x.status));
+}

@@ -15,19 +15,20 @@
   </head>
   <body>
     <header>
-      <h1>BuzzQuizz</h1>
+      <h1 onclick="window.location.reload()">BuzzQuizz</h1>
     </header>
-    <!-- tela1 -->
     <main>
+      <!-- tela1 -->
+    <div class="tela1">
       <!-- essa classe só aparece* enqnt ainda não tem quiz feito pelo user -->
-      <div class="create-quiz hidden">
+      <div class="create-quiz ">
         <h3>Você não criou nenhum quizz ainda</h3>
-        <button class="btn-create">Criar Quizz</button>
+        <button class="btn-create"  onclick="callQuizScreen3()">Criar Quizz</button>
       </div>
       <div class="my-quizzes hidden">
         <h2>Seus Quizzes</h2>
         <button class="btn-icon">
-          <ion-icon class="icon" name="add-circle"></ion-icon>
+          <ion-icon class="icon" name="add-circle"  onclick="callQuizScreen3()"></ion-icon>
           </ion-icon>
         </button>
       </div>
@@ -47,10 +48,10 @@
       </div>
 
       <!-- Todos os -->
-      <div class="all-quizzes hidden">
+      <div class="all-quizzes ">
         <h2>Todos os Quizzes</h2>
       </div>
-      <div class="wrappe-quiz hidden">
+      <div class="wrappe-quiz ">
         <div class="quiz">
           <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
           <p>testetstetse</p>
@@ -76,32 +77,32 @@
           <p>testetstetse</p>
         </div>
       </div>
-     
+    </div>
       <!-- tela1 -->
+
       <!-- abre Página 3.1 - info básica do quizz-->
-     
-        <div class="basic-info-background">
+        <div class="basic-info-background hidden">
     
-        <div class="creating-titles hidden">
+        <div class="creating-titles info">
           Comece pelo começo
         </div>
     
-        <div class="inputs-container hidden">
+        <div class="inputs-container ">
           <input class="inputs" type = "text" onchange="lengthCheck(value, 20, 65)" id="quiz-title" placeholder="Título do seu quizz" required>
           <input class="inputs" type = "url" id="quiz-image-url" placeholder="URL da imagem do seu quizz" required>
           <input class="inputs" type = "number" min="3" onchange="valueCheck(value, 3)" id="quiz-number-questions" placeholder="Quantidade de perguntas do quizz" required>
           <input class="inputs" type = "number" min="2" onchange="valueCheck(value, 2)" id="quiz-number-levels" placeholder="Quantidade de níveis do quizz" required>
         </div>
         
-         <button class="next-step-button hidden" onclick="confirmInfo()">Prosseguir para criar perguntas</button>
+         <button class="next-step-button " onclick="confirmInfo()">Prosseguir para criar perguntas</button>
         </div> 
       <!-- fecha Página 3.1 - info básica do quizz-->
       <!-- abre Página 3.2 - perguntas do quizz-->
-       <div class="creating-questions-background">
+       <div class="creating-questions-background hidden">
         
-        <div class="creating-titles hidden">Crie suas perguntas</div>
+        <div class="creating-titles questions-titles">Crie suas perguntas</div>
         
-        <div class="creating-background hidden">
+        <div class="creating-background ">
           <div class="inputs-container">
             <h4>Pergunta 1 </h4>
             <input type="text" class="question" placeholder="Texto da pergunta" />
@@ -167,20 +168,20 @@
           </div>
         </div>
         
-        <div class="next-step-button hidden" onclick="confirmQuestions()">
+        <div class="next-step-button " onclick="confirmQuestions()">
           Prosseguir para criar perguntas
         </div>
         </div>
       <!-- fecha Página 3.2 - perguntas do quizz-->
 
 <!-- abre Página 3.3 - levels do quizz-->
-<div class="creating-levels-background hidden ">
+<div class="creating-levels-background hidden">
 
-  <div class="creating-levels-titles creating-titles hidden">
+  <div class="creating-levels-titles creating-titles ">
     Agora, decida os níveis!
   </div>
 
-  <div class="creating-background hidden">
+  <div class="creating-background ">
     <div class="inputs-container">
       <h4>Nível 1</h4>
       <input class="question" type = "text" minlength="10" class="level" placeholder="Título do nível" required>
@@ -190,12 +191,12 @@
     </div> 
   </div>
 
-  <button class="next-step-button hidden" onclick="confirmLevels()">Finalizar Quizz</button>
+  <button class="next-step-button " onclick="confirmLevels()">Finalizar Quizz</button>
 </div>
 <!-- fecha Página 3.3 - levels do quizz-->
 
 <!-- abre Página 3.4 - conclusão do quizz-->
-<div class="creating-end-background">
+<div class="creating-end-background hidden">
 
 
   <div class="creating-end-titles creating-titles">
@@ -204,22 +205,20 @@
   <div class="creating-background">
     
     <img class="quizz-image" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" >
-    <span class="quizz-title"> testestetste
+    <span class="quizz-title"> testestetste</span>
    
-    </div> 
+  
   </div>
 
   <button class="next-step-button" onclick="goToCreatedQuizz()">Acessar Quizz</button>
-  <div class="home-button" onclick="backToPage1()">Voltar pra home</div>
+  <div class="home-button" onclick="window.location.reload()">Voltar pra home</div>
+
 </div>
 <!-- fecha Página 3.4 - conclusão do quizz-->
     </main>
     <footer></footer>
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-      ></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="script.js"></script> 
+    <script src="script.js"></script>
   </body>
 </html>
