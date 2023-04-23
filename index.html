@@ -18,170 +18,205 @@
       <h1 onclick="window.location.reload()">BuzzQuizz</h1>
     </header>
     <main>
-      <!-- tela1 -->
-    <div class="tela1">
-      <!-- essa classe só aparece* enqnt ainda não tem quiz feito pelo user -->
-      <div class="create-quiz ">
-        <h3>Você não criou nenhum quizz ainda</h3>
-        <button class="btn-create"  onclick="callQuizScreen3()">Criar Quizz</button>
-      </div>
-      <div class="my-quizzes hidden">
-        <h2>Seus Quizzes</h2>
-        <button class="btn-icon">
-          <ion-icon class="icon" name="add-circle"  onclick="callQuizScreen3()"></ion-icon>
-          </ion-icon>
-        </button>
-      </div>
-      <div class="wrappe-user-quiz hidden">
-        <div class="user-quiz">
-          <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
-          <p>testetstetse</p>
-        </div>
-        <div class="user-quiz">
-          <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
-          <p>testetstetse</p>
-        </div>
-        <div class="user-quiz">
-          <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
-          <p>testetstetse</p>
-        </div>
-      </div>
+<!-- abre a tela 1 -->
+<div class="tela1">
+  <!-- essa classe só aparece* enqnt ainda não tem quiz feito pelo user -->
+  <div class="create-quiz ">
+    <h3>Você não criou nenhum quizz ainda</h3>
+    <button class="btn-create"  onclick="callQuizScreen3()">Criar Quizz</button>
+  </div>
+  <div class="my-quizzes hidden">
+    <h2>Seus Quizzes</h2>
+    <button class="btn-icon">
+      <ion-icon class="icon" name="add-circle"  onclick="callQuizScreen3()"></ion-icon>
+      </ion-icon>
+    </button>
+  </div>
+  <div class="wrappe-user-quiz hidden">
+    <div class="user-quiz">
+      <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
+      <p>testetstetse</p>
+    </div>
+    <div class="user-quiz">
+      <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
+      <p>testetstetse</p>
+    </div>
+    <div class="user-quiz">
+      <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
+      <p>testetstetse</p>
+    </div>
+  </div>
 
-      <!-- Todos os -->
-      <div class="all-quizzes ">
-        <h2>Todos os Quizzes</h2>
+  <!-- Todos os -->
+  <div class="all-quizzes ">
+    <h2>Todos os Quizzes</h2>
+  </div>
+  <div class="wrappe-quiz ">
+    <div class="quiz">
+      <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
+      <p>testetstetse</p>
+    </div>
+    <div class="quiz">
+      <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
+      <p>testetstetse</p>
+    </div>
+    <div class="quiz">
+      <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
+      <p>testetstetse</p>
+    </div>
+    <div class="quiz">
+      <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
+      <p>testetstetse</p>
+    </div>
+    <div class="quiz">
+      <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
+      <p>testetstetse</p>
+    </div>
+    <div class="quiz">
+      <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
+      <p>testetstetse</p>
+    </div>
+  </div>
+</div>
+<!-- fecha tela 1 -->
+<!-- abre tela 2-->
+<div class="tela2 hidden">
+  <div class="playing-quizz-title">
+    <div class="playing-quiz-name"> 
+      <img class="img-quiz top-image" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" >
+      Título de teste para o quiz
+    </div>
+  </div>
+  <div class="playing-questions-container">
+    <div class="playing-question">
+      Você sadasdaa blábláblá?
+    </div>
+    <div class="playing-options-container">
+      <div class="option-a">
+        <img class="option-image" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq">
+        <div class="option-text"></div>
       </div>
-      <div class="wrappe-quiz ">
-        <div class="quiz">
-          <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
-          <p>testetstetse</p>
-        </div>
-        <div class="quiz">
-          <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
-          <p>testetstetse</p>
-        </div>
-        <div class="quiz">
-          <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
-          <p>testetstetse</p>
-        </div>
-        <div class="quiz">
-          <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
-          <p>testetstetse</p>
-        </div>
-        <div class="quiz">
-          <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
-          <p>testetstetse</p>
-        </div>
-        <div class="quiz">
-          <img class="img-quiz" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq" alt="">
-          <p>testetstetse</p>
-        </div>
+      <div class="option-b">
+             <img class="option-image" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq">
+        <div class="option-text"></div>
+      </div>
+      <div class="option-c">
+             <img class="option-image" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq">
+        <div class="option-text"></div>
+      </div>
+      <div class="option-d">
+             <img class="option-image" src="https://qph.cf2.quoracdn.net/main-qimg-edfd8894b5702a538aa863db43423771-lq">
+        <div class="option-text"></div>
       </div>
     </div>
-      <!-- tela1 -->
+  </div>
+</div>  
+<!-- fecha tela 2-->
+<!-- abre tela 3.1 - info básica do quizz-->
+<div class="basic-info-background hidden">
 
-      <!-- abre Página 3.1 - info básica do quizz-->
-        <div class="basic-info-background hidden">
-    
-        <div class="creating-titles info">
-          Comece pelo começo
-        </div>
-    
-        <div class="inputs-container ">
-          <input class="inputs" type = "text" onchange="lengthCheck(value, 20, 65)" id="quiz-title" placeholder="Título do seu quizz" required>
-          <input class="inputs" type = "url" id="quiz-image-url" placeholder="URL da imagem do seu quizz" required>
-          <input class="inputs" type = "number" min="3" onchange="valueCheck(value, 3)" id="quiz-number-questions" placeholder="Quantidade de perguntas do quizz" required>
-          <input class="inputs" type = "number" min="2" onchange="valueCheck(value, 2)" id="quiz-number-levels" placeholder="Quantidade de níveis do quizz" required>
-        </div>
-        
-         <button class="next-step-button " onclick="confirmInfo()">Prosseguir para criar perguntas</button>
-        </div> 
-      <!-- fecha Página 3.1 - info básica do quizz-->
-      <!-- abre Página 3.2 - perguntas do quizz-->
-       <div class="creating-questions-background hidden">
-        
-        <div class="creating-titles questions-titles">Crie suas perguntas</div>
-        
-        <div class="creating-background ">
-          <div class="inputs-container">
-            <h4>Pergunta 1 </h4>
-            <input type="text" class="question" placeholder="Texto da pergunta" />
-            <input
-              type="text"
-              class="question-color question"
-              placeholder="Cor de fundo da pergunta"
-            />
-          </div>
-        
-          <div class="inputs-container">
-            <h4>Resposta correta</h4> 
-            <input
-              type="text"
-              class="right-option question"
-              placeholder="Resposta correta"
-            />
-            <input
-              type="text"
-              class="right-image-url question"
-              placeholder="URL da imagem"
-            />
-          </div>
-        
-          <div class="wrong-options-container">
-            <div class="inputs-container">
-              <h4>Respostas incorreta</h4> 
-              <input
-                type="text"
-                class="wrong-option question"
-                placeholder="Resposta incorreta 1"
-              />
-              <input
-                type="text"
-                class="wrong-image-url question"
-                placeholder="URL da imagem 1"
-              />
-            </div>
-            <div class="inputs-container">
-              <input
-                type="text"
-                class="wrong-option question"
-                placeholder="Resposta incorreta 2"
-              />
-              <input
-                type="text"
-                class="wrong-image-url question"
-                placeholder="URL da imagem 2"
-              />
-            </div>
-            <div class="inputs-container">
-              <input
-                type="text"
-                class="wrong-option question"
-                placeholder="Resposta incorreta 3"
-              />
-              <input
-                type="text"
-                class="wrong-image-url question"
-                placeholder="URL da imagem 3"
-              />
-            </div>
-          </div>
-        </div>
-        
-        <div class="next-step-button " onclick="confirmQuestions()">
-          Prosseguir para criar perguntas
-        </div>
-        </div>
-      <!-- fecha Página 3.2 - perguntas do quizz-->
+  <div class="creating-titles">
+    Comece pelo começo
+  </div>
+
+  <div class="inputs-container ">
+    <input class="inputs" type = "text" onchange="lengthCheck(value, 20, 65)" id="quiz-title" placeholder="Título do seu quizz" required>
+    <input class="inputs" type = "url" id="quiz-image-url" placeholder="URL da imagem do seu quizz" required>
+    <input class="inputs" type = "number" min="3" onchange="valueCheck(value, 3)" id="quiz-number-questions" placeholder="Quantidade de perguntas do quizz" required>
+    <input class="inputs" type = "number" min="2" onchange="valueCheck(value, 2)" id="quiz-number-levels" placeholder="Quantidade de níveis do quizz" required>
+  </div>
+
+  <button class="next-step-button " onclick="confirmInfo()">Prosseguir para criar perguntas</button>
+</div> 
+<!-- fecha Página 3.1 - info básica do quizz-->
+
+<!-- abre Página 3.2 - perguntas do quizz-->
+<div class="creating-questions-background hidden">
+  
+  <div class="creating-titles questions-titles">Crie suas perguntas</div>
+  
+  <div class="creating-background">
+  <h4 class="collapsible">Pergunta 1 </h4>
+    <div class=" inputs-container">
+      <div class="inputs-container">
+      <input type="text" class="question" placeholder="Texto da pergunta" />
+      <input
+        type="text"
+        class="question-color question"
+        placeholder="Cor de fundo da pergunta"
+      />
+    </div>
+  
+    <div class="inputs-container">
+      <h4>Resposta correta</h4> 
+      <input
+        type="text"
+        class="right-option question"
+        placeholder="Resposta correta"
+      />
+      <input
+        type="text"
+        class="right-image-url question"
+        placeholder="URL da imagem"
+      />
+    </div>
+  
+    <div class="wrong-options-container">
+      <div class="inputs-container">
+        <h4>Respostas incorreta</h4> 
+        <input
+          type="text"
+          class="wrong-option question"
+          placeholder="Resposta incorreta 1"
+        />
+        <input
+          type="text"
+          class="wrong-image-url question"
+          placeholder="URL da imagem 1"
+        />
+      </div>
+      <div class="inputs-container">
+        <input
+          type="text"
+          class="wrong-option question"
+          placeholder="Resposta incorreta 2"
+        />
+        <input
+          type="text"
+          class="wrong-image-url question"
+          placeholder="URL da imagem 2"
+        />
+      </div>
+      <div class="inputs-container">
+        <input
+          type="text"
+          class="wrong-option question"
+          placeholder="Resposta incorreta 3"
+        />
+        <input
+          type="text"
+          class="wrong-image-url question"
+          placeholder="URL da imagem 3"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="next-step-button " onclick="confirmQuestions()">
+    Prosseguir para criar perguntas
+  </div>
+</div>
+<!-- fecha Página 3.2 - perguntas do quizz-->
 
 <!-- abre Página 3.3 - levels do quizz-->
-<div class="creating-levels-background hidden">
+<div class="creating-levels-background hidden ">
 
   <div class="creating-levels-titles creating-titles ">
     Agora, decida os níveis!
   </div>
 
-  <div class="creating-background ">
+  <div class="creating-background">
     <div class="inputs-container">
       <h4>Nível 1</h4>
       <input class="question" type = "text" minlength="10" class="level" placeholder="Título do nível" required>
