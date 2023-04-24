@@ -415,7 +415,7 @@ position: relative;
 }
 
 .playing-quizz-title{
-  height: 69px;
+  height: 145px;
   width: 100%;
   position: relative;
   overflow-y: hidden;
@@ -466,8 +466,8 @@ position: relative;
   font-size: 20px;
   line-height: 23px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-
   color: #009C22;
 }
 
@@ -478,6 +478,7 @@ position: relative;
   font-size: 20px;
   line-height: 23px;
   display: flex;
+  flex-direction: column;
   align-items: center;
 
   color: #FF4B4B;
@@ -490,10 +491,13 @@ position: relative;
   flex-direction: column;
 }
 
-
+.option-text{
+  z-index: 20;
+}
 .option-image{
   width: 330px;
   height: 175px;
+  z-index: 20;
 }
 
 
@@ -509,6 +513,7 @@ position: relative;
   font-size: 39px;
   font-weight: 400;
   line-height: 46px;
+  display: flex;
   align-items: center;
   text-align: center;
   justify-content: center;

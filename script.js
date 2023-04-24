@@ -72,7 +72,7 @@ function userQuiz() {
         let promisse = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${ids[i].id}`);
         promisse.then(x => {
             listaUQ.push(x.data);
-            exibeQuizzes(listaUQ, usQuiz, "user-quiz",'onclick="callQuizScreen2(this)"');
+            exibeQuizzes(listaUQ, usQuiz, "user-quiz",'onclick="callQuizScreen2(this)" data-test="my-quiz"');
         })
         promisse.catch(x => {
             console.log(`RETORNO DO USER QUIZ: ${x}`);
@@ -158,9 +158,9 @@ function gameQuiz(element) {
     for (let i = 0; i < playingOptions.length; i++) {
         const option = playingOptions[i].querySelector('.hidden');
         if (option !== null) {
-            const optionValue = option.innerHTML;
-            if (optionValue === 'true') {
-                playingOptions[i].classList.add('opc-certa');
+            const optionValue = option.classList;
+            if (optionValue.contains('true')) {
+                playingOptions[i].classList.add("opc-certa")
             } else {
                 playingOptions[i].classList.add('opc-errada');
             }
@@ -206,10 +206,12 @@ function callQuizScreen2(element) {
         
             const questionBackground = document.createElement("div");
             questionBackground.className = "playing-questions-container";
+            questionBackground.setAttribute("data-test", "question");
             
             const questionTitle = document.createElement("div");
             questionTitle.innerText = selectedQuizz.questions[i].title;
             questionTitle.className = "playing-question"
+            questionTitle.setAttribute("data-test", "question-title");
             questionTitle.style.backgroundColor = selectedQuizz.questions[i].color;
             questionBackground.appendChild(questionTitle);
     
@@ -220,22 +222,26 @@ function callQuizScreen2(element) {
             const firstOption = document.createElement("div");
             firstOption.className = "option-a";
             firstOption.setAttribute('onclick', 'gameQuiz(this)');
+            firstOption.setAttribute('data-test', 'answer');
             optionsContainer.appendChild(firstOption);
 
 
             const secondOption = document.createElement("div");
             secondOption.className = "option-b";
             secondOption.setAttribute('onclick', 'gameQuiz(this)');
+            secondOption.setAttribute('data-test', 'answer');
             optionsContainer.appendChild(secondOption);
 
             const thirdOption = document.createElement("div");
             thirdOption.className = "option-c";
             thirdOption.setAttribute('onclick', 'gameQuiz(this)');
+            thirdOption.setAttribute('data-test', 'answer');
             optionsContainer.appendChild(thirdOption);
 
             const fourthOption = document.createElement("div");
             fourthOption.className = "option-d";
             fourthOption.setAttribute('onclick', 'gameQuiz(this)');
+            fourthOption.setAttribute('data-test', 'answer');
             optionsContainer.appendChild(fourthOption);
  
             const playingOptionsArray = selectedQuizz.questions[i].answers;
@@ -269,6 +275,7 @@ function callQuizScreen2(element) {
             const firstOptionText = document.createElement("div");
             firstOptionText.innerText = a.text;
             firstOptionText.className = "option-text";
+            firstOptionText.setAttribute('data-test', 'answer-text');
             firstOption.appendChild(firstOptionText);
 
             const firstOptionCheck = document.createElement("div");
@@ -283,10 +290,15 @@ function callQuizScreen2(element) {
             const secondOptionText = document.createElement("div");
             secondOptionText.innerText = b.text;
             secondOptionText.className = "option-text";
+            secondOptionText.setAttribute('data-test', 'answer-text');
             secondOption.appendChild(secondOptionText);
 
             const secondOptionCheck = document.createElement("div");
-            secondOptionCheck.className = b.isCorrectAnswer + " hidden";
+                if (b.isCorrectAnswer === true){
+                    secondOptionCheck.className = "opc-correta hidden";
+                } else if (b.isCorrectAnswer === false){
+                    secondOptionCheck.className = "opc-errada hidden"
+                }
             secondOption.appendChild(secondOptionCheck);
 
             if (c!==0){
@@ -298,10 +310,15 @@ function callQuizScreen2(element) {
             const thirdOptionText = document.createElement("div");
             thirdOptionText.innerText = c.text;
             thirdOptionText.className = "option-text";
+            thirdOptionText.setAttribute('data-test', 'answer-text');
             thirdOption.appendChild(thirdOptionText);
              
             const thirdOptionCheck = document.createElement("div");
-            thirdOptionCheck.className = c.isCorrectAnswer + " hidden";
+            if (c.isCorrectAnswer === true){
+                thirdOptionCheck.className = "opc-correta hidden";
+            } else if (c.isCorrectAnswer === false){
+                thirdOptionCheck.className = "opc-errada hidden"
+            }
             thirdOption.appendChild(thirdOptionCheck);
             
             }
@@ -316,10 +333,15 @@ function callQuizScreen2(element) {
             const fourthOptionText = document.createElement("div");
             fourthOptionText.innerText = d.text;
             fourthOptionText.className = "option-text";
+            fourthOptionText.setAttribute('data-test', 'answer-text');
             fourthOption.appendChild(fourthOptionText);
             
             const fourthOptionCheck = document.createElement("div");
-            fourthOptionCheck.className = d.isCorrectAnswer + " hidden";
+            if (d.isCorrectAnswer === true){
+                fourthOptionCheck.className = "opc-correta hidden";
+            } else if (d.isCorrectAnswer === false){
+                fourthOptionCheck.className = "opc-errada hidden"
+            }
             fourthOption.appendChild(fourthOptionCheck);
             }
             
@@ -330,12 +352,14 @@ function callQuizScreen2(element) {
         const reloadButton = document.createElement("button");
         reloadButton.className = "next-step-button";
         reloadButton.setAttribute("onclick", "reiniciarQuizz()");
+        reloadButton.setAttribute("data-test", "restart")
         reloadButton.innerText = "Reiniciar Quizz";
         secondScreen.appendChild(reloadButton);
 
         const backToHome = document.createElement("div");
         backToHome.className = "home-button";
         backToHome.setAttribute("onclick", "window.location.reload()");
+        backToHome.setAttribute("data-test", "go-home");
         backToHome.innerText = "Voltar pra home";
         secondScreen.appendChild(backToHome);
 
@@ -350,7 +374,7 @@ function reiniciarQuizz(){
 //percorre e adiciona cada quiz do array na div de "where" + CLASSS adiciona classe e FUN adiciona funções
 function exibeQuizzes(array, where, classs, fun) {
     array.forEach(element => {
-        where.innerHTML += `<div id="${element.id}" ${fun} class="${classs}">
+        where.innerHTML += `<div id="${element.id}" ${fun} class="${classs}" >
         <img class="img-quiz" src="${element.image}" alt="">
         <p>${element.title}</p>
       </div>`    
@@ -367,7 +391,7 @@ function showAllQuizT1() {
     pro.then(x => {
         console.log(x);
         arrayQuiz = x.data;
-        exibeQuizzes(arrayQuiz, allQuizzes, "quiz", 'onclick="callQuizScreen2(this)"');
+        exibeQuizzes(arrayQuiz, allQuizzes, "quiz", 'onclick="callQuizScreen2(this)" data-test="others-quiz"');
         
     }) 
 
@@ -508,12 +532,14 @@ function confirmInfo(){
 
     for (i=0; i<numberOfQuestions; i++){
         const questionBackground = document.createElement("div");
+        questionBackground.setAttribute("data-test", "question-ctn")
         questionBackground.className = "creating-background";
         
         const questionTitle = document.createElement("h4");
         questionTitle.innerText = "Pergunta " + (numberOfQuestions - i);
         questionTitle.className = "questions-title-collapse"
         questionTitle.setAttribute("onclick", "collapse(this)");
+        questionTitle.setAttribute("data-test", "toggle")
         questionBackground.appendChild(questionTitle);
 
 
@@ -530,13 +556,13 @@ function confirmInfo(){
         inputQuestion.className = "question-text question";
         inputQuestion.setAttribute("type", "text")
         inputQuestion.setAttribute('minlength', "20")
-        inputQuestion.setAttribute("required", true)
+        inputQuestion.setAttribute("data-test", "question-input")
         inputQuestion.setAttribute('placeholder', "Texto da pergunta")
         infoContainer.appendChild(inputQuestion)
         
         const inputQuestionColor = document.createElement("input");
         inputQuestionColor.className = "question-color question";
-        inputQuestionColor.setAttribute("required", true)
+        inputQuestionColor.setAttribute("data-test", "question-color-input")
         inputQuestionColor.setAttribute('placeholder', "Cor de fundo da pergunta")
         infoContainer.appendChild(inputQuestionColor);
 
@@ -550,13 +576,13 @@ function confirmInfo(){
 
         const inputRightOption = document.createElement("input");
         inputRightOption.className = "right-option question";
-        inputRightOption.setAttribute("required", true)
+        inputRightOption.setAttribute("data-test", "correct-answer-input")
         inputRightOption.setAttribute('placeholder', 'Resposta correta')
         rightContainer.appendChild(inputRightOption)
         
         const inputRightImage = document.createElement("input");
         inputRightImage.className = "right-image-url question";
-        inputRightImage.setAttribute("required", true)
+        inputRightImage.setAttribute("data-test", "correct-img-input")
         inputRightImage.setAttribute('placeholder', 'URL da imagem')
         rightContainer.appendChild(inputRightImage);
 
@@ -574,11 +600,13 @@ function confirmInfo(){
 
         const inputWrongOption1 = document.createElement("input");
         inputWrongOption1.className = "wrong-option question";
+        inputWrongOption1.setAttribute('data-test', 'wrong-answer-input');
         inputWrongOption1.setAttribute('placeholder', 'Resposta incorreta 1');
         wrongContainer1.appendChild(inputWrongOption1)
         
         const inputWrongImage1 = document.createElement("input");
         inputWrongImage1.className = "wrong-image-url question";
+        inputWrongImage1.setAttribute('data-test', 'wrong-answer-img');
         inputWrongImage1.setAttribute('placeholder', 'URL da imagem 1');
         wrongContainer1.appendChild(inputWrongImage1);
         
@@ -588,13 +616,13 @@ function confirmInfo(){
 
         const inputWrongOption2 = document.createElement("input");
         inputWrongOption2.className = "wrong-option question";
-        inputWrongOption2.setAttribute("required", true)
+        inputWrongOption2.setAttribute('data-test', 'wrong-answer-input');
         inputWrongOption2.setAttribute('placeholder', 'Resposta incorreta 2');
         wrongContainer2.appendChild(inputWrongOption2)
         
         const inputWrongImage2 = document.createElement("input");
         inputWrongImage2.className = "wrong-image-url question";
-        inputWrongImage2.setAttribute("required", true)
+        inputWrongImage2.setAttribute('data-test', 'wrong-answer-img');
         inputWrongImage2.setAttribute('placeholder', 'URL da imagem 2');
         wrongContainer2.appendChild(inputWrongImage2);
 
@@ -604,13 +632,13 @@ function confirmInfo(){
 
         const inputWrongOption3 = document.createElement("input");
         inputWrongOption3.className = "wrong-option question";
-        inputWrongOption3.setAttribute("required", true)
+        inputWrongOption3.setAttribute('data-test', 'wrong-answer-input');
         inputWrongOption3.setAttribute('placeholder', 'Resposta incorreta 3');
         wrongContainer3.appendChild(inputWrongOption3)
         
         const inputWrongImage3 = document.createElement("input");
         inputWrongImage3.className = "wrong-image-url question";
-        inputWrongImage3.setAttribute("required", true)
+        inputWrongImage3.setAttribute('data-test', 'wrong-answer-img');
         inputWrongImage3.setAttribute('placeholder', 'URL da imagem 3');
         wrongContainer3.appendChild(inputWrongImage3);
 
@@ -620,12 +648,14 @@ function confirmInfo(){
 
     for (i=0; i<numberOfLevels; i++){
         const levelBackground = document.createElement("div");
+        levelBackground.setAttribute("data-test", "level-ctn")
         levelBackground.className = "creating-background";
         
         const levelTitle = document.createElement("h4");
         levelTitle.innerText = "Nível " + (numberOfLevels - i);
         levelTitle.className = "levels-title-collapse"
         levelTitle.setAttribute("onclick", "collapse(this)");
+        levelTitle.setAttribute("data-test", "toggle")
         levelBackground.appendChild(levelTitle);
         
         const inputsContainer = document.createElement("div");
@@ -636,7 +666,7 @@ function confirmInfo(){
         inputLevel.className = "level question";
         inputLevel.setAttribute("type", "text")
         inputLevel.setAttribute('minlength', "10")
-        inputLevel.setAttribute("required", true)
+        inputLevel.setAttribute("data-test", "level-input")
         inputLevel.setAttribute('placeholder', "Título do nível")
         inputsContainer.appendChild(inputLevel)
         
@@ -644,7 +674,7 @@ function confirmInfo(){
         inputLevelPercentage.className = "level-percentage question";
         inputLevelPercentage.setAttribute("type", "number")
         inputLevelPercentage.setAttribute('min', "0")
-        inputLevelPercentage.setAttribute("required", true)
+        inputLevelPercentage.setAttribute("data-test", "level-percent-input")
         inputLevelPercentage.setAttribute('placeholder', "% de acerto mínima")
         inputsContainer.appendChild(inputLevelPercentage);
         console.log(inputLevelPercentage)
@@ -652,14 +682,14 @@ function confirmInfo(){
         const inputLevelUrl = document.createElement("input");
         inputLevelUrl.className = "level-url question";
         inputLevelUrl.setAttribute("type", "url")
-        inputLevelUrl.setAttribute("required", true)
+        inputLevelUrl.setAttribute("data-test", "level-img-input")
         inputLevelUrl.setAttribute('placeholder', 'URL da imagem do nível')
         inputsContainer.appendChild(inputLevelUrl)
         
         const inputLevelDescription = document.createElement("input");
         inputLevelDescription.className = "level-description question";
         inputLevelDescription.setAttribute("type", "text")
-        inputLevelDescription.setAttribute("required", true)
+        inputLevelDescription.setAttribute("data-test", "level-description-input")
         inputLevelDescription.setAttribute('placeholder', 'Descrição do nível')
         inputsContainer.appendChild(inputLevelDescription);
 
@@ -830,6 +860,7 @@ function postProcess(resposta){
 
 function printCreatedQuizz(resposta){    
     const createdQuizzBackground = document.createElement("div");
+    createdQuizzBackground.setAttribute("data-test", "success-banner");
     createdQuizzBackground.className = "creating-background";
         
     const createdQuizzImage = document.createElement("img");
