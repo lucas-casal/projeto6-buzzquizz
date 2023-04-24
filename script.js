@@ -1,17 +1,17 @@
 axios.defaults.headers.common['Authorization'] = 'Sz9geys35NfoLDyLNU8wOlUm';
 
 function callScreen3() {
-    const screnn31 = document.querySelector('.basic-info-background');
+    const screen31 = document.querySelector('.basic-info-background');
     const tela1 = document.querySelector('.tela1');
     tela1.classList.add('hidden');
-    screnn31.classList.remove('hidden');
+    screen31.classList.remove('hidden');
 }
 
 function callScreen2() {
-    //const screnn31 = document.querySelector('.basic-info-background');
+    //const screen31 = document.querySelector('.basic-info-background');
     //const tela1 = document.querySelector('.tela1');
     //tela1.classList.add('hidden');
-    //screnn31.classList.remove('hidden');
+    //screen31.classList.remove('hidden');
     console.log('CHAMA TELA 2');
 }
 
@@ -98,15 +98,21 @@ if (temId) {
 }
 
 
+function toggleScreen12() {
+    const t1 = document.querySelector('.tela1');
+    const t2 = document.querySelector('.tela2');
+    t1.classList.toggle('hidden');
+    t2.classList.toggle('hidden');
+}
+
 
 //A função que vai pegar o quiz clicado e chamar display none pra tela 1
 function callQuizScreen2(element) {
+    toggleScreen12();
     console.log(element);
     const pros = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${element.id}`);
     pros.then(x => {
-        console.log('clicou')
-        document.querySelector(".tela2").classList.remove(".hidden")
-        document.querySelector(".tela1").classList.add(".hidden")
+        console.log('clicou');
         console.log(x);
     });
     pros.catch(x => console.log(x.status));
