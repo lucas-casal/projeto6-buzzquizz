@@ -543,9 +543,13 @@ function confirmInfo(){
         questionBackground.appendChild(questionTitle);
 
 
-        
+     
         const inputsContainer = document.createElement("div");
+        if (i===0){
+            inputsContainer.className = "question-container";
+        } else{
         inputsContainer.className = "teste question-container";
+        }
         questionBackground.appendChild(inputsContainer)
 
         const infoContainer = document.createElement("div");
@@ -659,7 +663,12 @@ function confirmInfo(){
         levelBackground.appendChild(levelTitle);
         
         const inputsContainer = document.createElement("div");
-        inputsContainer.className = "teste level-container";
+        if(i===0){
+            inputsContainer.className = "level-container"
+        }
+        else {
+            inputsContainer.className = "teste level-container"
+        };
         levelBackground.appendChild(inputsContainer);
 
         const inputLevel = document.createElement("input");
