@@ -163,8 +163,18 @@ function callQuizScreen2(element) {
 
             const a = playingOptionsArray[0];
             const b = playingOptionsArray[1];
-            const c = playingOptionsArray[2];
-            const d = playingOptionsArray[3];
+            var c = 0;
+            var d = 0
+            if (playingOptionsArray.length === 3){
+                
+                c = playingOptionsArray[2];
+            
+            } else if (playingOptionsArray.length === 4) {
+            
+                c = playingOptionsArray[2];
+                d = playingOptionsArray[3];
+            
+            }
             
             const firstOptionImage = document.createElement("img");
             firstOptionImage.setAttribute("src", a.image);
@@ -196,6 +206,7 @@ function callQuizScreen2(element) {
             secondOptionCheck.className = "hidden";
             secondOption.appendChild(secondOptionCheck);
 
+            if (c!==0){
             const thirdOptionImage = document.createElement("img");
             thirdOptionImage.setAttribute("src", c.image);
             thirdOptionImage.className = "option-image";
@@ -210,7 +221,9 @@ function callQuizScreen2(element) {
             thirdOptionCheck.innerText = c.isCorrectAnswer;
             thirdOptionCheck.className = "hidden";
             thirdOption.appendChild(thirdOptionCheck);
+            }
 
+            if(d!==0){
             const fourthOptionImage = document.createElement("img");
             fourthOptionImage.setAttribute("src", d.image);
             fourthOptionImage.className = "option-image";
@@ -225,7 +238,8 @@ function callQuizScreen2(element) {
             fourthOptionCheck.innerText = d.isCorrectAnswer;
             fourthOptionCheck.className = "hidden";
             fourthOption.appendChild(fourthOptionCheck);
-
+            }
+            
             secondScreen.appendChild(questionBackground);
 
         }
@@ -589,6 +603,7 @@ function confirmQuestions(){
         const rightOption = document.querySelectorAll(".right-option")[i].value;
         const rightImage = document.querySelectorAll(".right-image-url")[i].value;  
         var stopIt = false
+
         //checking inputs
         if (!lengthCheck(question, 20)){
             alert("Uma de suas perguntas tem " + question.length + " caracteres! \n Deveria ter, pelo menos, 20.")
@@ -597,13 +612,13 @@ function confirmQuestions(){
         } else if (!hexCheck(questionColor)){
             alert ("Um dos códigos de cor digitados não está no formato HEX!")
             stopIt = true
+            break     
+        } else if (!checkUrl(rightImage)){
+            alert("URL da imagem digitada é inválida!");
+            stopIt = true
             break
         } else if (!lengthCheck(rightOption, 1)){
             alert("Uma de suas respostas corretas está vazia!")
-            stopIt = true
-            break
-        } else if (!checkUrl(rightImage)){
-            alert("URL da imagem digitada é inválida!");
             stopIt = true
             break
         }
@@ -615,11 +630,11 @@ function confirmQuestions(){
         }
         optionsArray.push(rightOptionObject);
 
-        for (x=1; x<4; x++){
+        for (x=1; x< wrongOptionArray.length; x++){
             const wrongOption = wrongOptionArray[x].children[0].value;
             const wrongImage = wrongOptionArray[x].children[1].value;
             
-
+            if (lengthCheck(wrongImage, 1)){
             if (!lengthCheck(wrongOption, 1)){
                 alert("Uma de suas respostas incorretas está vazia!")
                 break creating_questions_block;
@@ -633,6 +648,7 @@ function confirmQuestions(){
                     isCorrectAnswer: false
                 }
             optionsArray.push(wrongOptionObject);
+            } else{}
         }
  
         const questionObject = {
