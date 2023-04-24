@@ -112,8 +112,141 @@ function callQuizScreen2(element) {
     console.log(element);
     const pros = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${element.id}`);
     pros.then(x => {
-        console.log('clicou');
+        console.log('clicou')
+        document.querySelector(".tela2").classList.remove("hidden")
+        document.querySelector(".tela1").classList.add("hidden")
         console.log(x);
+        const selectedQuizz = x.data;
+        const playingTopImage = document.querySelector(".top-image");
+        playingTopImage.setAttribute("src", selectedQuizz.image);
+
+        numberOfQuestions = selectedQuizz.questions.length;
+
+        const secondScreen = document.querySelector(".tela2");
+
+        for(i=secondScreen.children.length-1; i >=1 ; i--){
+        secondScreen.children[i].remove();
+        }
+
+        for (i=0; i<numberOfQuestions; i++){
+        
+            const questionBackground = document.createElement("div");
+            questionBackground.className = "playing-questions-container";
+            
+            const questionTitle = document.createElement("div");
+            questionTitle.innerText = selectedQuizz.questions[i].title;
+            questionTitle.className = "playing-question"
+            questionTitle.style.backgroundColor = selectedQuizz.questions[i].color;
+            questionBackground.appendChild(questionTitle);
+    
+            const optionsContainer = document.createElement("div");
+            optionsContainer.className = "playing-options-container";
+            questionBackground.appendChild(optionsContainer)
+    
+            const firstOption = document.createElement("div");
+            firstOption.className = "option-a";
+            optionsContainer.appendChild(firstOption);
+
+
+            const secondOption = document.createElement("div");
+            secondOption.className = "option-b";
+            optionsContainer.appendChild(secondOption);
+
+            const thirdOption = document.createElement("div");
+            thirdOption.className = "option-c";
+            optionsContainer.appendChild(thirdOption);
+
+            const fourthOption = document.createElement("div");
+            fourthOption.className = "option-d";
+            optionsContainer.appendChild(fourthOption);
+ 
+            const playingOptionsArray = selectedQuizz.questions[i].answers;
+            playingOptionsArray.sort(comparador);
+            function comparador() { 
+                return Math.random() - 0.5; 
+            };
+
+            const a = playingOptionsArray[0];
+            const b = playingOptionsArray[1];
+            const c = playingOptionsArray[2];
+            const d = playingOptionsArray[3];
+            
+            const firstOptionImage = document.createElement("img");
+            firstOptionImage.setAttribute("src", a.image);
+            firstOptionImage.className = "option-image";
+            firstOption.appendChild(firstOptionImage);
+
+            const firstOptionText = document.createElement("div");
+            firstOptionText.innerText = a.text;
+            firstOptionText.className = "option-text";
+            firstOption.appendChild(firstOptionText);
+
+            const firstOptionCheck = document.createElement("div");
+            firstOptionCheck.innerText = a.isCorrectAnswer;
+            firstOptionCheck.className = "hidden";
+            firstOption.appendChild(firstOptionCheck);
+
+            const secondOptionImage = document.createElement("img");
+            secondOptionImage.setAttribute("src", b.image);
+            secondOptionImage.className = "option-image";
+            secondOption.appendChild(secondOptionImage);
+
+            const secondOptionText = document.createElement("div");
+            secondOptionText.innerText = b.text;
+            secondOptionText.className = "option-text";
+            secondOption.appendChild(secondOptionText);
+
+            const secondOptionCheck = document.createElement("div");
+            secondOptionCheck.innerText = b.isCorrectAnswer;
+            secondOptionCheck.className = "hidden";
+            secondOption.appendChild(secondOptionCheck);
+
+            const thirdOptionImage = document.createElement("img");
+            thirdOptionImage.setAttribute("src", c.image);
+            thirdOptionImage.className = "option-image";
+            thirdOption.appendChild(thirdOptionImage);
+
+            const thirdOptionText = document.createElement("div");
+            thirdOptionText.innerText = c.text;
+            thirdOptionText.className = "option-text";
+            thirdOption.appendChild(thirdOptionText);
+
+            const thirdOptionCheck = document.createElement("div");
+            thirdOptionCheck.innerText = c.isCorrectAnswer;
+            thirdOptionCheck.className = "hidden";
+            thirdOption.appendChild(thirdOptionCheck);
+
+            const fourthOptionImage = document.createElement("img");
+            fourthOptionImage.setAttribute("src", d.image);
+            fourthOptionImage.className = "option-image";
+            fourthOption.appendChild(fourthOptionImage);
+
+            const fourthOptionText = document.createElement("div");
+            fourthOptionText.innerText = d.text;
+            fourthOptionText.className = "option-text";
+            fourthOption.appendChild(fourthOptionText);
+
+            const fourthOptionCheck = document.createElement("div");
+            fourthOptionCheck.innerText = d.isCorrectAnswer;
+            fourthOptionCheck.className = "hidden";
+            fourthOption.appendChild(fourthOptionCheck);
+
+            secondScreen.appendChild(questionBackground);
+
+        }
+            
+        const reloadButton = document.createElement("button");
+        reloadButton.className = "next-step-button";
+        reloadButton.setAttribute("onclick", "reiniciarQuizz()");
+        reloadButton.innerText = "Reiniciar Quizz";
+        secondScreen.appendChild(reloadButton);
+
+        const backToHome = document.createElement("div");
+        backToHome.className = "home-button";
+        backToHome.setAttribute("onclick", "window.location.reload()");
+        backToHome.innerText = "Voltar pra home";
+        secondScreen.appendChild(backToHome);
+
     });
     pros.catch(x => console.log(x.status));
 }
@@ -622,7 +755,13 @@ function goToCreatedQuizz(element= createdQuizzID){
     const pros = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${element}`);
     pros.then(x => {
         console.log('clicou')
+        document.querySelector(".tela2").classList.remove("hidden")
+        document.querySelector(".basic-info-background").classList.add("hidden")
         console.log(x);
+        const selectedQuizz = x.data;
+        const playingTopImage = document.querySelector(".top-image");
+        playingTopImage.set("src", selectedQuizz.image);
+
     });
     pros.catch(x => console.log(x.status));
 }
@@ -644,3 +783,6 @@ function collapse(a){
         }
     }
 };
+
+
+
