@@ -107,6 +107,14 @@ function toggleScreen12() {
 
 function gameQuiz(element) {
     console.log(element);
+    console.log(element.parentNode);
+
+    const playingOptions = element.parentNode;
+    for (i=0; i<=playingOptions.length-1; i++) {
+        console.log(playingOptions[i].firstChild);
+        console.log(playingOptions[i].firstChild.classList);
+    }
+    element.classList.remove('not-selected');
     //toda vez que clicar quero que:
     //remova a classe hidden do (first, second, third, fourth)OptionCheck
     //adicione o "isCorrectAnswer" em um array para calcular a porcentagem de acertos
@@ -156,23 +164,23 @@ function callQuizScreen2(element) {
     
             const firstOption = document.createElement("div");
             firstOption.className = "option-a";
-            firstOption.setAttribute('onclick', 'gameQuiz()');
+            firstOption.setAttribute('onclick', 'gameQuiz(this)');
             optionsContainer.appendChild(firstOption);
 
 
             const secondOption = document.createElement("div");
             secondOption.className = "option-b";
-            secondOption.setAttribute('onclick', 'gameQuiz()');
+            secondOption.setAttribute('onclick', 'gameQuiz(this)');
             optionsContainer.appendChild(secondOption);
 
             const thirdOption = document.createElement("div");
             thirdOption.className = "option-c";
-            thirdOption.setAttribute('onclick', 'gameQuiz()');
+            thirdOption.setAttribute('onclick', 'gameQuiz(this)');
             optionsContainer.appendChild(thirdOption);
 
             const fourthOption = document.createElement("div");
             fourthOption.className = "option-d";
-            fourthOption.setAttribute('onclick', 'gameQuiz()');
+            fourthOption.setAttribute('onclick', 'gameQuiz(this)');
             optionsContainer.appendChild(fourthOption);
  
             const playingOptionsArray = selectedQuizz.questions[i].answers;
@@ -180,6 +188,8 @@ function callQuizScreen2(element) {
             function comparador() { 
                 return Math.random() - 0.5; 
             };
+
+            console.log(selectedQuizz);
 
             const a = playingOptionsArray[0];
             const b = playingOptionsArray[1];
@@ -217,37 +227,42 @@ function callQuizScreen2(element) {
             secondOption.appendChild(secondOptionCheck);
 
 
+            try {
+                const thirdOptionImage = document.createElement("img");
+                thirdOptionImage.setAttribute("src", c.image);
+                thirdOptionImage.className = "option-image";
+                thirdOption.appendChild(thirdOptionImage);
 
-            const thirdOptionImage = document.createElement("img");
-            thirdOptionImage.setAttribute("src", c.image);
-            thirdOptionImage.className = "option-image";
-            thirdOption.appendChild(thirdOptionImage);
+                const thirdOptionText = document.createElement("div");
+                thirdOptionText.innerText = c.text;
+                thirdOptionText.className = "option-text";
+                thirdOption.appendChild(thirdOptionText);
 
-            const thirdOptionText = document.createElement("div");
-            thirdOptionText.innerText = c.text;
-            thirdOptionText.className = "option-text";
-            thirdOption.appendChild(thirdOptionText);
+                const thirdOptionCheck = document.createElement("div");
+                thirdOptionCheck.innerText = c.isCorrectAnswer;
+                thirdOptionCheck.className = "hidden";
+                thirdOption.appendChild(thirdOptionCheck);
 
-            const thirdOptionCheck = document.createElement("div");
-            thirdOptionCheck.innerText = c.isCorrectAnswer;
-            thirdOptionCheck.className = "hidden";
-            thirdOption.appendChild(thirdOptionCheck);
+                const fourthOptionImage = document.createElement("img");
+                fourthOptionImage.setAttribute("src", d.image);
+                fourthOptionImage.className = "option-image";
+                fourthOption.appendChild(fourthOptionImage);
 
-            const fourthOptionImage = document.createElement("img");
-            fourthOptionImage.setAttribute("src", d.image);
-            fourthOptionImage.className = "option-image";
-            fourthOption.appendChild(fourthOptionImage);
+                const fourthOptionText = document.createElement("div");
+                fourthOptionText.innerText = d.text;
+                fourthOptionText.className = "option-text";
+                fourthOption.appendChild(fourthOptionText);
 
-            const fourthOptionText = document.createElement("div");
-            fourthOptionText.innerText = d.text;
-            fourthOptionText.className = "option-text";
-            fourthOption.appendChild(fourthOptionText);
+                const fourthOptionCheck = document.createElement("div");
+                fourthOptionCheck.innerText = d.isCorrectAnswer;
+                fourthOptionCheck.className = "hidden";
+                fourthOption.appendChild(fourthOptionCheck);
 
-            const fourthOptionCheck = document.createElement("div");
-            fourthOptionCheck.innerText = d.isCorrectAnswer;
-            fourthOptionCheck.className = "hidden";
-            fourthOption.appendChild(fourthOptionCheck);
-
+                
+            } catch (error) {
+                console.log(error)    ;
+            }
+            
             secondScreen.appendChild(questionBackground);
 
         }
