@@ -610,7 +610,7 @@ function confirmInfo(){
         
         const inputWrongImage1 = document.createElement("input");
         inputWrongImage1.className = "wrong-image-url question";
-        inputWrongImage1.setAttribute('data-test', 'wrong-answer-img');
+        inputWrongImage1.setAttribute('data-test', 'wrong-img-input');
         inputWrongImage1.setAttribute('placeholder', 'URL da imagem 1');
         wrongContainer1.appendChild(inputWrongImage1);
         
@@ -626,7 +626,7 @@ function confirmInfo(){
         
         const inputWrongImage2 = document.createElement("input");
         inputWrongImage2.className = "wrong-image-url question";
-        inputWrongImage2.setAttribute('data-test', 'wrong-answer-img');
+        inputWrongImage2.setAttribute('data-test', 'wrong-img-input');
         inputWrongImage2.setAttribute('placeholder', 'URL da imagem 2');
         wrongContainer2.appendChild(inputWrongImage2);
 
@@ -642,7 +642,7 @@ function confirmInfo(){
         
         const inputWrongImage3 = document.createElement("input");
         inputWrongImage3.className = "wrong-image-url question";
-        inputWrongImage3.setAttribute('data-test', 'wrong-answer-img');
+        inputWrongImage3.setAttribute('data-test', 'wrong-img-input');
         inputWrongImage3.setAttribute('placeholder', 'URL da imagem 3');
         wrongContainer3.appendChild(inputWrongImage3);
 
