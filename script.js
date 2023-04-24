@@ -545,7 +545,7 @@ function confirmInfo(){
 
      
         const inputsContainer = document.createElement("div");
-        if (i===0){
+        if (i===numberOfQuestions-1){
             inputsContainer.className = "question-container";
         } else{
         inputsContainer.className = "teste question-container";
@@ -663,7 +663,7 @@ function confirmInfo(){
         levelBackground.appendChild(levelTitle);
         
         const inputsContainer = document.createElement("div");
-        if(i===0){
+        if(i===numberOfLevels -1){
             inputsContainer.className = "level-container"
         }
         else {
