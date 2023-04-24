@@ -59,19 +59,20 @@ com api get e depois exiba na tela*/
 
 // "id": [id1, id2, id3, id4];
 //ids: array ^^^^^   //ainda n foi testada
+const usQuiz = document.querySelector('.wrappe-user-quiz');
 let listaUQ = [];
 function userQuiz() {
     let ids = getIdLocalStorage();
     console.log(ids);
     console.log('ids acima');
-    const usQuiz = document.querySelector('.wrappe-user-quiz');
+    
     usQuiz.innerHTML = '';
-    for (i = 0; i<ids.length -1; i++) {
+    for (i = 0; i<ids.length; i++) {
+
         let promisse = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${ids[i].id}`);
         promisse.then(x => {
-            console.log(`RETORNO DO USER QUIZ: ${i}:`);
-            console.log(x);
             listaUQ.push(x.data);
+            exibeQuizzes(listaUQ, usQuiz, "user-quiz",'onclick="callQuizScreen2(this)"');
         })
         promisse.catch(x => {
             console.log(`RETORNO DO USER QUIZ: ${x}`);
@@ -79,16 +80,21 @@ function userQuiz() {
         })
     }
 
-    //Inicio de um ṕroblema; nao está exibindo na tela:
-    exibeQuizzes(listaUQ, usQuiz, "user-quiz",'onclick="callQuizScreen2(this)"');
 }
+    
 
 
 //
 if (temId) {
     userQuiz();
+    document.querySelector(".my-quizzes").classList.remove("hidden");
+    document.querySelector(".wrappe-user-quiz").classList.remove("hidden")
+    document.querySelector(".create-quiz").classList.add("hidden")
 } else {
     console.log('não tem id ainda');
+    document.querySelector(".my-quizzes").classList.add("hidden");
+    document.querySelector(".wrappe-user-quiz").classList.add("hidden")
+    document.querySelector(".create-quiz").classList.remove("hidden")
 }
 
 
@@ -99,6 +105,8 @@ function callQuizScreen2(element) {
     const pros = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${element.id}`);
     pros.then(x => {
         console.log('clicou')
+        document.querySelector(".tela2").classList.remove(".hidden")
+        document.querySelector(".tela1").classList.add(".hidden")
         console.log(x);
     });
     pros.catch(x => console.log(x.status));
@@ -135,9 +143,16 @@ function showAllQuizT1() {
 
 showAllQuizT1();
 
+function callQuizScreen3(){
+    document.querySelector('.tela1').classList.add("hidden");
+    document.querySelector('.basic-info-background').classList.remove("hidden");
+}
 //tela1 end
 
-//código referente à tela3 
+
+
+
+// tela 3 V
 var title=0;
 var image=0;
 var numberOfQuestions=1;
@@ -163,23 +178,23 @@ function checkUrl(string) {
 //função para checar hexadecimal
 function hexCheck(hex){
     colorCheckedArray=[];
-    var R = hex.substr(0,2);
-    var G = hex.substr(2,2);
-    var B = hex.substr(4,2);
+    var R = hex.substr(1,2);
+    var G = hex.substr(3,2);
+    var B = hex.substr(5,2);
 
-    if (hex.length === 6){
-        R = hex.substr(0,2);
-        G = hex.substr(2,2);
-        B = hex.substr(4,2);
+    if (hex.length === 7){
+        R = hex.substr(1,2);
+        G = hex.substr(3,2);
+        B = hex.substr(5,2);
 
         decimalR = parseInt(R, 16)
         decimalG = parseInt(G, 16)
         decimalB = parseInt(B, 16)
 
-    } else if (hex.length === 3){
-        R = hex.substr(0,1);
-        G = hex.substr(1,1);
-        B = hex.substr(2,1);
+    } else if (hex.length === 4){
+        R = hex.substr(1,1);
+        G = hex.substr(2,1);
+        B = hex.substr(3,1);
     
         decimalR = parseInt(R, 16)
         decimalG = parseInt(G, 16)
@@ -234,16 +249,20 @@ function confirmInfo(){
     const quizTitle = document.getElementById("quiz-title").value;
     numberOfQuestions= document.getElementById("quiz-number-questions").value;
     numberOfLevels = document.getElementById("quiz-number-levels").value;
+    var stopIt = false;
 
     if (!lengthCheck(quizTitle, 20, 65)){
         alert("O título inserido para o quizz tem " + quizTitle.length + " caracteres! \n Deveria ter entre 20 e 65")
-        
+        stopIt = true
     } else if (!checkUrl(quizImage)){
         alert("URL da imagem digitada é inválida!");
+        stopIt = true
     } else if (!valueCheck(numberOfQuestions, 3)){
         alert("Você deve criar, pelo menos, 3 perguntas!");
+        stopIt = true
     } else if(!valueCheck(numberOfLevels, 2)){
         alert("Você deve criar, pelo menos, 2 níveis!");
+        stopIt = true
     }
 
     //cria as "caixas" de criação de perguntas
@@ -256,60 +275,75 @@ function confirmInfo(){
         const questionBackground = document.createElement("div");
         questionBackground.className = "creating-background";
         
+        const questionTitle = document.createElement("h4");
+        questionTitle.innerText = "Pergunta " + (numberOfQuestions - i);
+        questionTitle.className = "questions-title-collapse"
+        questionTitle.setAttribute("onclick", "collapse(this)");
+        questionBackground.appendChild(questionTitle);
+
+
+        
         const inputsContainer = document.createElement("div");
-        inputsContainer.innerText = "Pergunta " + (numberOfQuestions - i);
-        inputsContainer.className = "inputs-container";
-        questionBackground.appendChild(inputsContainer);
+        inputsContainer.className = "teste question-container";
+        questionBackground.appendChild(inputsContainer)
+
+        const infoContainer = document.createElement("div");
+        infoContainer.className = "inputs-container";
+        inputsContainer.appendChild(infoContainer)
 
         const inputQuestion = document.createElement("input");
-        inputQuestion.className = "question";
+        inputQuestion.className = "question-text question";
         inputQuestion.setAttribute("type", "text")
         inputQuestion.setAttribute('minlength', "20")
         inputQuestion.setAttribute("required", true)
         inputQuestion.setAttribute('placeholder', "Texto da pergunta")
-        inputsContainer.appendChild(inputQuestion)
+        infoContainer.appendChild(inputQuestion)
         
         const inputQuestionColor = document.createElement("input");
-        inputQuestionColor.className = "question-color";
+        inputQuestionColor.className = "question-color question";
         inputQuestionColor.setAttribute("required", true)
         inputQuestionColor.setAttribute('placeholder', "Cor de fundo da pergunta")
-        inputsContainer.appendChild(inputQuestionColor);
+        infoContainer.appendChild(inputQuestionColor);
 
         const rightContainer = document.createElement("div");
-        rightContainer.className = "inputs-container";
-        rightContainer.innerText = "Resposta correta";
-        questionBackground.appendChild(rightContainer);
+        rightContainer.className = "right-container";
+        inputsContainer.appendChild(rightContainer);
+
+        const rightContainerText = document.createElement("h4");
+        rightContainerText.innerText = "Resposta correta";
+        rightContainer.appendChild(rightContainerText);
 
         const inputRightOption = document.createElement("input");
-        inputRightOption.className = "right-option";
+        inputRightOption.className = "right-option question";
         inputRightOption.setAttribute("required", true)
         inputRightOption.setAttribute('placeholder', 'Resposta correta')
         rightContainer.appendChild(inputRightOption)
         
         const inputRightImage = document.createElement("input");
-        inputRightImage.className = "right-image-url";
+        inputRightImage.className = "right-image-url question";
         inputRightImage.setAttribute("required", true)
         inputRightImage.setAttribute('placeholder', 'URL da imagem')
         rightContainer.appendChild(inputRightImage);
 
         const wrongContainer = document.createElement("div");
         wrongContainer.className = "wrong-options-container";
-        wrongContainer.innerText = "Respostas incorretas";
-        questionBackground.appendChild(wrongContainer);
+        inputsContainer.appendChild(wrongContainer);
+
+        const wrongContainerText = document.createElement("h4");
+        wrongContainerText.innerText = "Respostas incorretas";
+        wrongContainer.appendChild(wrongContainerText);
 
         const wrongContainer1 = document.createElement("div");
         wrongContainer1.className = "inputs-container";
         wrongContainer.appendChild(wrongContainer1);
 
         const inputWrongOption1 = document.createElement("input");
-        inputWrongOption1.className = "wrong-option";
-        inputWrongOption1.setAttribute("required", true)
+        inputWrongOption1.className = "wrong-option question";
         inputWrongOption1.setAttribute('placeholder', 'Resposta incorreta 1');
         wrongContainer1.appendChild(inputWrongOption1)
         
         const inputWrongImage1 = document.createElement("input");
-        inputWrongImage1.className = "wrong-image-url ";
-        inputWrongImage1.setAttribute("required", true)
+        inputWrongImage1.className = "wrong-image-url question";
         inputWrongImage1.setAttribute('placeholder', 'URL da imagem 1');
         wrongContainer1.appendChild(inputWrongImage1);
         
@@ -318,13 +352,13 @@ function confirmInfo(){
         wrongContainer.appendChild(wrongContainer2);
 
         const inputWrongOption2 = document.createElement("input");
-        inputWrongOption2.className = "wrong-option";
+        inputWrongOption2.className = "wrong-option question";
         inputWrongOption2.setAttribute("required", true)
         inputWrongOption2.setAttribute('placeholder', 'Resposta incorreta 2');
         wrongContainer2.appendChild(inputWrongOption2)
         
         const inputWrongImage2 = document.createElement("input");
-        inputWrongImage2.className = "wrong-image-url";
+        inputWrongImage2.className = "wrong-image-url question";
         inputWrongImage2.setAttribute("required", true)
         inputWrongImage2.setAttribute('placeholder', 'URL da imagem 2');
         wrongContainer2.appendChild(inputWrongImage2);
@@ -334,18 +368,18 @@ function confirmInfo(){
         wrongContainer.appendChild(wrongContainer3);
 
         const inputWrongOption3 = document.createElement("input");
-        inputWrongOption3.className = "wrong-option";
+        inputWrongOption3.className = "wrong-option question";
         inputWrongOption3.setAttribute("required", true)
         inputWrongOption3.setAttribute('placeholder', 'Resposta incorreta 3');
         wrongContainer3.appendChild(inputWrongOption3)
         
         const inputWrongImage3 = document.createElement("input");
-        inputWrongImage3.className = "wrong-image-url";
+        inputWrongImage3.className = "wrong-image-url question";
         inputWrongImage3.setAttribute("required", true)
         inputWrongImage3.setAttribute('placeholder', 'URL da imagem 3');
         wrongContainer3.appendChild(inputWrongImage3);
 
-        document.querySelector(".creating-questions-titles").after(questionBackground)        
+        document.querySelector(".questions-titles").after(questionBackground)        
     }
      
 
@@ -353,13 +387,18 @@ function confirmInfo(){
         const levelBackground = document.createElement("div");
         levelBackground.className = "creating-background";
         
+        const levelTitle = document.createElement("h4");
+        levelTitle.innerText = "Nível " + (numberOfLevels - i);
+        levelTitle.className = "levels-title-collapse"
+        levelTitle.setAttribute("onclick", "collapse(this)");
+        levelBackground.appendChild(levelTitle);
+        
         const inputsContainer = document.createElement("div");
-        inputsContainer.innerText = "Nível " + (numberOfLevels - i);
-        inputsContainer.className = "inputs-container";
+        inputsContainer.className = "teste level-container";
         levelBackground.appendChild(inputsContainer);
 
         const inputLevel = document.createElement("input");
-        inputLevel.className = "level";
+        inputLevel.className = "level question";
         inputLevel.setAttribute("type", "text")
         inputLevel.setAttribute('minlength', "10")
         inputLevel.setAttribute("required", true)
@@ -367,7 +406,7 @@ function confirmInfo(){
         inputsContainer.appendChild(inputLevel)
         
         const inputLevelPercentage = document.createElement("input");
-        inputLevelPercentage.className = "level-percentage";
+        inputLevelPercentage.className = "level-percentage question";
         inputLevelPercentage.setAttribute("type", "number")
         inputLevelPercentage.setAttribute('min', "0")
         inputLevelPercentage.setAttribute("required", true)
@@ -376,14 +415,14 @@ function confirmInfo(){
         console.log(inputLevelPercentage)
 
         const inputLevelUrl = document.createElement("input");
-        inputLevelUrl.className = "level-url";
+        inputLevelUrl.className = "level-url question";
         inputLevelUrl.setAttribute("type", "url")
         inputLevelUrl.setAttribute("required", true)
         inputLevelUrl.setAttribute('placeholder', 'URL da imagem do nível')
         inputsContainer.appendChild(inputLevelUrl)
         
         const inputLevelDescription = document.createElement("input");
-        inputLevelDescription.className = "level-description";
+        inputLevelDescription.className = "level-description question";
         inputLevelDescription.setAttribute("type", "text")
         inputLevelDescription.setAttribute("required", true)
         inputLevelDescription.setAttribute('placeholder', 'Descrição do nível')
@@ -391,7 +430,12 @@ function confirmInfo(){
 
         document.querySelector(".creating-levels-titles").after(levelBackground)        
     }
+    if (!stopIt){
+    document.querySelector(".creating-questions-background").classList.remove("hidden")
+    document.querySelector(".basic-info-background").classList.add("hidden")
+    }
 }
+
 
 
 
@@ -400,25 +444,29 @@ function confirmQuestions(){
     questionsArray = []
     for (i=0; i<numberOfQuestions; i++){
         optionsArray = []
-        const question = document.querySelectorAll(".question")[i].value;
+        const question = document.querySelectorAll(".question-text")[i].value;
         const questionColor = document.querySelectorAll(".question-color")[i].value;
-        const color = "#" + questionColor;
+        const color = questionColor;
         const wrongOptionArray = document.querySelectorAll(".wrong-options-container")[i].children;
         const rightOption = document.querySelectorAll(".right-option")[i].value;
         const rightImage = document.querySelectorAll(".right-image-url")[i].value;  
-        
+        var stopIt = false
         //checking inputs
         if (!lengthCheck(question, 20)){
             alert("Uma de suas perguntas tem " + question.length + " caracteres! \n Deveria ter, pelo menos, 20.")
+            stopIt = true
             break
         } else if (!hexCheck(questionColor)){
             alert ("Um dos códigos de cor digitados não está no formato HEX!")
+            stopIt = true
             break
         } else if (!lengthCheck(rightOption, 1)){
             alert("Uma de suas respostas corretas está vazia!")
+            stopIt = true
             break
         } else if (!checkUrl(rightImage)){
             alert("URL da imagem digitada é inválida!");
+            stopIt = true
             break
         }
         
@@ -429,7 +477,7 @@ function confirmQuestions(){
         }
         optionsArray.push(rightOptionObject);
 
-        for (x=0; x<3; x++){
+        for (x=1; x<4; x++){
             const wrongOption = wrongOptionArray[x].children[0].value;
             const wrongImage = wrongOptionArray[x].children[1].value;
             
@@ -459,8 +507,12 @@ function confirmQuestions(){
 
     }
     createdQuizz.questions = questionsArray;
-
-}}
+    if (!stopIt){
+        document.querySelector(".creating-questions-background").classList.add("hidden")
+        document.querySelector(".creating-levels-background").classList.remove("hidden")
+    }
+}
+}
 
 
 function confirmLevels(){
@@ -512,15 +564,77 @@ function confirmLevels(){
     createdQuizz.levels = levelsArray
     console.log(createdQuizz);
     } 
-    const promise = axios.post(
+
+    const promisePost = axios.post(
         "https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes",
         createdQuizz
     );
-  
-  promise.then(apiFeedback);
+    
+   
+    promisePost.then(postProcess);
 }
 
-function apiFeedback(sent) {
-    console.log(sent.data);
+var createdQuizzID = 0;
+function getProcess(resposta){
+    console.log(resposta.data);
+    createdQuizzID = resposta.data[0].id
+    addIdLocalStorage(createdQuizzID)
+    printCreatedQuizz(resposta.data[0]);
 }
 
+function postProcess(resposta){
+    const promiseGet = axios.get(
+        "https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes",
+    );
+    promiseGet.then(getProcess);
+    console.log(resposta.data);
+
+}
+
+function printCreatedQuizz(resposta){    
+    const createdQuizzBackground = document.createElement("div");
+    createdQuizzBackground.className = "creating-background";
+        
+    const createdQuizzImage = document.createElement("img");
+    createdQuizzImage.className = "quizz-image";
+    createdQuizzImage.setAttribute("src", resposta.image);
+    createdQuizzBackground.appendChild(createdQuizzImage);
+
+    const createdQuizzTitle = document.createElement("span");
+    createdQuizzTitle.className = "quizz-title";
+    createdQuizzTitle.innerText = resposta.title;
+    createdQuizzBackground.appendChild(createdQuizzTitle);
+    document.querySelector(".creating-end-titles").after(createdQuizzBackground);    
+
+    document.querySelector(".creating-levels-background").classList.add("hidden")
+    document.querySelector(".creating-end-background").classList.remove("hidden")
+
+}
+
+function goToCreatedQuizz(element= createdQuizzID){
+    console.log(element);
+    const pros = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${element}`);
+    pros.then(x => {
+        console.log('clicou')
+        console.log(x);
+    });
+    pros.catch(x => console.log(x.status));
+}
+
+
+function collapse(a){ 
+    var content = a.nextElementSibling;
+
+    if (content.classList.contains("teste")) {
+      content.classList.remove("teste");
+    } else{
+        content.classList.add("teste")
+    }
+
+  const coll = document.getElementsByClassName(a.classList[0])
+    for (i=0; i<coll.length; i++){
+        if (coll[i] !== a){
+            coll[i].nextElementSibling.classList.add("teste");
+        }
+    }
+};

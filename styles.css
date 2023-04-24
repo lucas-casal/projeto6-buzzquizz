@@ -18,6 +18,7 @@ header {
 }
 
 h1 {
+  cursor: pointer;
   width: 176px;
   height: 43px;
   text-align: center;
@@ -66,6 +67,7 @@ h3 {
 }
 
 .btn-create {
+  cursor: pointer;
   width: 151px;
   height: 40px;
   background: #fafafa;
@@ -106,6 +108,7 @@ h2 {
 }
 
 .btn-icon {
+  cursor: pointer;
   border: none;
   background: #fafafa;
 }
@@ -186,7 +189,7 @@ p {
 
 .hidden {
   display: none;
-} 
+}
 .basic-info-background {
   display: flex;
   align-items: center;
@@ -195,7 +198,7 @@ p {
 }
 
 .creating-titles {
-  width: 195px;
+  width: 100%;
   height: 23px;
   font-family: "Roboto", sans-serif;
   margin: 71px 0 27px 0;
@@ -213,9 +216,38 @@ p {
   flex-direction: column;
   gap: 9px;
   width: 600px;
-  height: 256px;
   background: #ffffff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+  padding:0 17px 0 17px;
+}
+
+  
+  
+.right-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 9px;
+  width: 600px;
+  background: #ffffff;
+  padding: 27px 17px 27px 17px;
+}
+  
+.wrong-options-container {
+  background-color: aqua;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 9px;
+  width: 600px;
+  
+  background: #ffffff;
+  padding: 27px 17px 27px 17px;
 }
 
 .inputs {
@@ -233,9 +265,10 @@ p {
 }
 
 .next-step-button {
-  width: 368.86px;
+  cursor: pointer;
+  width: 352px;
   height: 54px;
-  margin: 85px 0 0 0;
+  margin: 85px 0 25px 0px;
   background: #ec362d;
   border-radius: 15px;
   font-family: "Roboto", sans-serif;
@@ -264,36 +297,55 @@ p {
   flex-direction: column;
   background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 22px;
+  
 }
 
-@media ((max-width: 1100px) ) {
-  header {
-      width: 100%
-  }
-  .my-quizzes{
-      justify-content: space-between;
-  }
-  .wrappe-user-quiz {
-      flex-direction: column;
-  }
+.level-container{
+  height: 266px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.question-container{
+  height: 825px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #ec362d;
 }
 .inputs-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  height: auto;
+  background-color: white;
 }
 
+input{
+  padding-left: 23px;
+  font-family: "roboto", sans-serif;
+  font-style: italic; 
+}
+
+
 .question {
+  padding-left: 23px;
+  font-family: "roboto", sans-serif;
+  font-style: italic; 
   width: 564px;
   height: 46px;
   background: #ffffff;
   border: 1px solid #d1d1d1;
   border-radius: 5px;
+  margin-bottom: 14px;
+
 }
 
 h4 {
-  width: 100%;
+
+  width: 600px;
   height: 23px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -305,6 +357,86 @@ h4 {
   align-items: center;
   color: #000000;
 }
+
+.questions-title-collapse{
+  height: 74px;
+  cursor: pointer;
+  
+}
+
+.levels-title-collapse{
+  height: 74px;
+  cursor: pointer;
+}
+
+.teste{
+
+  display: none;
+  overflow: hidden;
+}
+
+.creating-levels-background {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.creating-end-background {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+}
+
+
+
+.quizz-image {
+  width: 500px;
+  height: 266px;
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(0, 0, 0, 0.5) 65.62%,
+      rgba(0, 0, 0, 0.8) 100%
+    ),
+    url(image.png);
+object-fit: cover;
+position: relative;
+  border-radius: 5px;
+}
+
+.quizz-title {
+position: absolute;
+width: 309px;
+height: 54px;
+font-family: "Roboto", sans-serif;
+font-style: normal;
+font-weight: 400;
+font-size: 23px;
+line-height: 27px;
+display: flex;
+align-items: center;
+color: #FFFFFF;
+}
+
+.home-button {
+ width: 100%;
+height: 44px;
+font-family: "Roboto", sans-serif;
+font-style: normal;
+font-weight: 400;
+font-size: 21px;
+line-height: 25px;
+text-align: center;
+color: #818181;
+
+}
+
+
 
 .hidden {
   display: none;
@@ -325,3 +457,4 @@ h4 {
     flex-direction: column;
   }
 }
+
