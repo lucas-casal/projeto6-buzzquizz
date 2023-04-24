@@ -105,22 +105,73 @@ function toggleScreen12() {
     t2.classList.toggle('hidden');
 }
 
-function gameQuiz(element) {
-    console.log(element);
-    console.log(element.parentNode);
+let imgQuizi;
 
-    const playingOptions = element.parentNode;
-    for (i=0; i<=playingOptions.length-1; i++) {
-        console.log(playingOptions[i].firstChild);
-        console.log(playingOptions[i].firstChild.classList);
+/* function gameQuiz(element) {
+    let countWin = 0;
+    console.log(element);
+    imgQuizi = element;
+
+    const playingOptions = element.parentNode.childNodes;
+    console.log(playingOptions);
+
+    for (i=0; i<= playingOptions.length -1; i++){
+        console.log(i);
+        playingOptions[i].classList.add('not-selected');
     }
     element.classList.remove('not-selected');
+    for (i=0; i<= playingOptions.length -1; i++){
+        let certa = playingOptions[i].querySelector('.hidden').innerHTML; // true or false
+        if (certa === 'true') {
+            playingOptions[i].classList.add('opc-certa');
+        } else {
+            playingOptions[i].classList.add('opc-errada');
+        }
+    }
     //toda vez que clicar quero que:
     //remova a classe hidden do (first, second, third, fourth)OptionCheck
     //adicione o "isCorrectAnswer" em um array para calcular a porcentagem de acertos
     //adicione a class not-selected em todos as outras opções
 
+} */
+
+function gameQuiz(element) {
+    const playingOptions = element.parentNode.childNodes;
+
+    // Adicionar a classe "not-selected" a todas as opções
+    for (let i = 0; i < playingOptions.length; i++) {
+        playingOptions[i].classList.add('not-selected');
+    }
+
+    // Adicionar a classe "selected" ao elemento selecionado
+    element.classList.remove('not-selected');
+    element.classList.add('selected');
+
+    // Remover a classe "selected" dos outros elementos
+    for (let i = 0; i < playingOptions.length; i++) {
+        if (playingOptions[i] !== element) {
+            playingOptions[i].classList.remove('selected');
+        }
+    }
+
+    // Adicionar classes "opc-certa" ou "opc-errada" a todas as opções
+    for (let i = 0; i < playingOptions.length; i++) {
+        const option = playingOptions[i].querySelector('.hidden');
+        if (option !== null) {
+            const optionValue = option.innerHTML;
+            if (optionValue === 'true') {
+                playingOptions[i].classList.add('opc-certa');
+            } else {
+                playingOptions[i].classList.add('opc-errada');
+            }
+        } else {
+            playingOptions[i].classList.add('opc-errada');
+        }
+    }
 }
+
+
+
 
 var playingQuizz = 0;
 

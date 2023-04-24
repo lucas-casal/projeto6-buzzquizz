@@ -428,11 +428,12 @@ position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .playing-options-container{
-  width: 375px;
-  height:330px;
+  width: 684px;
+  height:auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -454,10 +455,45 @@ position: relative;
   opacity: 0.3;
 }
 
+.selected {
+  opacity: 1;
+}
+
+.opc-certa {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
+
+  color: #009C22;
+}
+
+.opc-errada {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
+
+  color: #FF4B4B;
+
+  opacity: 0.3;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+}
+
 
 .option-image{
-  width: 163px;
-  height: 113px;
+  width: 330px;
+  height: 175px;
 }
 
 
