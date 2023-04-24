@@ -105,6 +105,15 @@ function toggleScreen12() {
     t2.classList.toggle('hidden');
 }
 
+function gameQuiz(element) {
+    console.log(element);
+    //toda vez que clicar quero que:
+    //remova a classe hidden do (first, second, third, fourth)OptionCheck
+    //adicione o "isCorrectAnswer" em um array para calcular a porcentagem de acertos
+    //adicione a class not-selected em todos as outras opções
+
+}
+
 
 //A função que vai pegar o quiz clicado e chamar display none pra tela 1
 function callQuizScreen2(element) {
@@ -117,6 +126,7 @@ function callQuizScreen2(element) {
         document.querySelector(".tela1").classList.add("hidden")
         console.log(x);
         const selectedQuizz = x.data;
+        console.log(selectedQuizz);
         const playingTopImage = document.querySelector(".top-image");
         playingTopImage.setAttribute("src", selectedQuizz.image);
 
@@ -125,9 +135,10 @@ function callQuizScreen2(element) {
         const secondScreen = document.querySelector(".tela2");
 
         for(i=secondScreen.children.length-1; i >=1 ; i--){
-        secondScreen.children[i].remove();
+            secondScreen.children[i].remove();
         }
 
+        //renderiza as questões
         for (i=0; i<numberOfQuestions; i++){
         
             const questionBackground = document.createElement("div");
@@ -145,19 +156,23 @@ function callQuizScreen2(element) {
     
             const firstOption = document.createElement("div");
             firstOption.className = "option-a";
+            firstOption.setAttribute('onclick', 'gameQuiz()');
             optionsContainer.appendChild(firstOption);
 
 
             const secondOption = document.createElement("div");
             secondOption.className = "option-b";
+            secondOption.setAttribute('onclick', 'gameQuiz()');
             optionsContainer.appendChild(secondOption);
 
             const thirdOption = document.createElement("div");
             thirdOption.className = "option-c";
+            thirdOption.setAttribute('onclick', 'gameQuiz()');
             optionsContainer.appendChild(thirdOption);
 
             const fourthOption = document.createElement("div");
             fourthOption.className = "option-d";
+            fourthOption.setAttribute('onclick', 'gameQuiz()');
             optionsContainer.appendChild(fourthOption);
  
             const playingOptionsArray = selectedQuizz.questions[i].answers;
@@ -172,7 +187,7 @@ function callQuizScreen2(element) {
             const d = playingOptionsArray[3];
             
             const firstOptionImage = document.createElement("img");
-            firstOptionImage.setAttribute("src", a.image);
+            firstOptionImage.setAttribute("src", toString(a.image));
             firstOptionImage.className = "option-image";
             firstOption.appendChild(firstOptionImage);
 
@@ -200,6 +215,8 @@ function callQuizScreen2(element) {
             secondOptionCheck.innerText = b.isCorrectAnswer;
             secondOptionCheck.className = "hidden";
             secondOption.appendChild(secondOptionCheck);
+
+
 
             const thirdOptionImage = document.createElement("img");
             thirdOptionImage.setAttribute("src", c.image);
