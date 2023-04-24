@@ -221,8 +221,7 @@ function callQuizScreen2(element) {
             firstOption.appendChild(firstOptionText);
 
             const firstOptionCheck = document.createElement("div");
-            firstOptionCheck.innerText = a.isCorrectAnswer;
-            firstOptionCheck.className = "hidden";
+            firstOptionCheck.className = a.isCorrectAnswer + " hidden";
             firstOption.appendChild(firstOptionCheck);
 
             const secondOptionImage = document.createElement("img");
@@ -236,8 +235,7 @@ function callQuizScreen2(element) {
             secondOption.appendChild(secondOptionText);
 
             const secondOptionCheck = document.createElement("div");
-            secondOptionCheck.innerText = b.isCorrectAnswer;
-            secondOptionCheck.className = "hidden";
+            secondOptionCheck.className = b.isCorrectAnswer + " hidden";
             secondOption.appendChild(secondOptionCheck);
 
             if (c!==0){
@@ -252,8 +250,7 @@ function callQuizScreen2(element) {
             thirdOption.appendChild(thirdOptionText);
              
             const thirdOptionCheck = document.createElement("div");
-            thirdOptionCheck.innerText = c.isCorrectAnswer;
-            thirdOptionCheck.className = "hidden";
+            thirdOptionCheck.className = c.isCorrectAnswer + " hidden";
             thirdOption.appendChild(thirdOptionCheck);
             
             }
@@ -271,8 +268,7 @@ function callQuizScreen2(element) {
             fourthOption.appendChild(fourthOptionText);
             
             const fourthOptionCheck = document.createElement("div");
-            fourthOptionCheck.innerText = d.isCorrectAnswer;
-            fourthOptionCheck.className = "hidden";
+            fourthOptionCheck.className = d.isCorrectAnswer + " hidden";
             fourthOption.appendChild(fourthOptionCheck);
             }
             
