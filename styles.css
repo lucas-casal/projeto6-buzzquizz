@@ -450,6 +450,11 @@ position: relative;
   width: 340px;
 }
 
+.not-selected {
+  opacity: 0.3;
+}
+
+
 .option-image{
   width: 163px;
   height: 113px;

@@ -1,17 +1,17 @@
 axios.defaults.headers.common['Authorization'] = 'Sz9geys35NfoLDyLNU8wOlUm';
 
 function callScreen3() {
-    const screnn31 = document.querySelector('.basic-info-background');
+    const screen31 = document.querySelector('.basic-info-background');
     const tela1 = document.querySelector('.tela1');
     tela1.classList.add('hidden');
-    screnn31.classList.remove('hidden');
+    screen31.classList.remove('hidden');
 }
 
 function callScreen2() {
-    //const screnn31 = document.querySelector('.basic-info-background');
+    //const screen31 = document.querySelector('.basic-info-background');
     //const tela1 = document.querySelector('.tela1');
     //tela1.classList.add('hidden');
-    //screnn31.classList.remove('hidden');
+    //screen31.classList.remove('hidden');
     console.log('CHAMA TELA 2');
 }
 
@@ -97,10 +97,36 @@ if (temId) {
     document.querySelector(".create-quiz").classList.remove("hidden")
 }
 
+
+function toggleScreen12() {
+    const t1 = document.querySelector('.tela1');
+    const t2 = document.querySelector('.tela2');
+    t1.classList.toggle('hidden');
+    t2.classList.toggle('hidden');
+}
+
+function gameQuiz(element) {
+    console.log(element);
+    console.log(element.parentNode);
+
+    const playingOptions = element.parentNode;
+    for (i=0; i<=playingOptions.length-1; i++) {
+        console.log(playingOptions[i].firstChild);
+        console.log(playingOptions[i].firstChild.classList);
+    }
+    element.classList.remove('not-selected');
+    //toda vez que clicar quero que:
+    //remova a classe hidden do (first, second, third, fourth)OptionCheck
+    //adicione o "isCorrectAnswer" em um array para calcular a porcentagem de acertos
+    //adicione a class not-selected em todos as outras opções
+
+}
+
 var playingQuizz = 0;
 
 //A função que vai pegar o quiz clicado e chamar display none pra tela 1
 function callQuizScreen2(element) {
+    toggleScreen12();
     console.log(element);
     const pros = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${element.id}`);
     pros.then(x => {
@@ -109,6 +135,7 @@ function callQuizScreen2(element) {
         document.querySelector(".tela1").classList.add("hidden")
         console.log(x);
         const selectedQuizz = x.data;
+        console.log(selectedQuizz);
         const playingTopImage = document.querySelector(".top-image");
         playingTopImage.setAttribute("src", selectedQuizz.image);
         playingQuizzId = selectedQuizz;
@@ -120,9 +147,10 @@ function callQuizScreen2(element) {
         const secondScreen = document.querySelector(".tela2");
 
         for(i=secondScreen.children.length-1; i >=1 ; i--){
-        secondScreen.children[i].remove();
+            secondScreen.children[i].remove();
         }
 
+        //renderiza as questões
         for (i=0; i<numberOfQuestions; i++){
         
             const questionBackground = document.createElement("div");
@@ -140,19 +168,23 @@ function callQuizScreen2(element) {
     
             const firstOption = document.createElement("div");
             firstOption.className = "option-a";
+            firstOption.setAttribute('onclick', 'gameQuiz(this)');
             optionsContainer.appendChild(firstOption);
 
 
             const secondOption = document.createElement("div");
             secondOption.className = "option-b";
+            secondOption.setAttribute('onclick', 'gameQuiz(this)');
             optionsContainer.appendChild(secondOption);
 
             const thirdOption = document.createElement("div");
             thirdOption.className = "option-c";
+            thirdOption.setAttribute('onclick', 'gameQuiz(this)');
             optionsContainer.appendChild(thirdOption);
 
             const fourthOption = document.createElement("div");
             fourthOption.className = "option-d";
+            fourthOption.setAttribute('onclick', 'gameQuiz(this)');
             optionsContainer.appendChild(fourthOption);
  
             const playingOptionsArray = selectedQuizz.questions[i].answers;
@@ -160,6 +192,8 @@ function callQuizScreen2(element) {
             function comparador() { 
                 return Math.random() - 0.5; 
             };
+
+            console.log(selectedQuizz);
 
             const a = playingOptionsArray[0];
             const b = playingOptionsArray[1];
@@ -216,14 +250,16 @@ function callQuizScreen2(element) {
             thirdOptionText.innerText = c.text;
             thirdOptionText.className = "option-text";
             thirdOption.appendChild(thirdOptionText);
-
+             
             const thirdOptionCheck = document.createElement("div");
             thirdOptionCheck.innerText = c.isCorrectAnswer;
             thirdOptionCheck.className = "hidden";
             thirdOption.appendChild(thirdOptionCheck);
+            
             }
 
             if(d!==0){
+
             const fourthOptionImage = document.createElement("img");
             fourthOptionImage.setAttribute("src", d.image);
             fourthOptionImage.className = "option-image";
@@ -233,7 +269,7 @@ function callQuizScreen2(element) {
             fourthOptionText.innerText = d.text;
             fourthOptionText.className = "option-text";
             fourthOption.appendChild(fourthOptionText);
-
+            
             const fourthOptionCheck = document.createElement("div");
             fourthOptionCheck.innerText = d.isCorrectAnswer;
             fourthOptionCheck.className = "hidden";
