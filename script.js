@@ -122,6 +122,7 @@ function gameQuiz(element) {
 
 }
 
+var playingQuizz = 0;
 
 //A função que vai pegar o quiz clicado e chamar display none pra tela 1
 function callQuizScreen2(element) {
@@ -137,6 +138,9 @@ function callQuizScreen2(element) {
         console.log(selectedQuizz);
         const playingTopImage = document.querySelector(".top-image");
         playingTopImage.setAttribute("src", selectedQuizz.image);
+        playingQuizzId = selectedQuizz;
+        playingQuizzName = document.querySelector(".playing-quizz-name");
+        playingQuizzName.innerText = selectedQuizz.title;
 
         numberOfQuestions = selectedQuizz.questions.length;
 
@@ -282,6 +286,10 @@ function callQuizScreen2(element) {
     });
     pros.catch(x => console.log(x.status));
 }
+function reiniciarQuizz(){
+    callQuizScreen2(playingQuizzId); 
+
+} 
 
 //percorre e adiciona cada quiz do array na div de "where" + CLASSS adiciona classe e FUN adiciona funções
 function exibeQuizzes(array, where, classs, fun) {
@@ -793,7 +801,6 @@ function goToCreatedQuizz(element= createdQuizzID){
         const selectedQuizz = x.data;
         const playingTopImage = document.querySelector(".top-image");
         playingTopImage.set("src", selectedQuizz.image);
-
     });
     pros.catch(x => console.log(x.status));
 }
